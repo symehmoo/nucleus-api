@@ -2,18 +2,18 @@ package org.symehmoo.nucleus.model;
 
 import java.util.UUID;
 
-public class LobDTO {
+public class MnemonicDTO {
 	private UUID id;
-	private String lobName;
+	private String mnemonicName;
 
-	public LobDTO() {
+	public MnemonicDTO() {
 		super();
 	}
 
-	public LobDTO(UUID id, String lobName) {
+	public MnemonicDTO(UUID id, String mnemonicName) {
 		super();
 		this.id = id;
-		this.lobName = lobName;
+		this.mnemonicName = mnemonicName;
 	}
 
 	public UUID getId() {
@@ -24,12 +24,12 @@ public class LobDTO {
 		this.id = id;
 	}
 
-	public String getLobName() {
-		return lobName;
+	public String getMnemonicName() {
+		return mnemonicName;
 	}
 
-	public void setLobName(String lobName) {
-		this.lobName = lobName;
+	public void setMnemonicName(String mnemonicName) {
+		this.mnemonicName = mnemonicName;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class LobDTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
+		result = prime * result + ((mnemonicName == null) ? 0 : mnemonicName.hashCode());
 		return result;
 	}
 
@@ -49,23 +49,23 @@ public class LobDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LobDTO other = (LobDTO) obj;
+		MnemonicDTO other = (MnemonicDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (lobName == null) {
-			if (other.lobName != null)
+		if (mnemonicName == null) {
+			if (other.mnemonicName != null)
 				return false;
-		} else if (!lobName.equals(other.lobName))
+		} else if (!mnemonicName.equals(other.mnemonicName))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "LobDTO [id=" + id + ", lobName=" + lobName + "]";
+		return "MnemonicDTO [id=" + id + ", mnemonicName=" + mnemonicName + "]";
 	}
 
 }

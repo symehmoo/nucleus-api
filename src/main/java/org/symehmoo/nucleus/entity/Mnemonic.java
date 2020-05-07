@@ -1,5 +1,7 @@
 package org.symehmoo.nucleus.entity;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "mnemonic")
@@ -20,7 +23,8 @@ public class Mnemonic extends BaseEntity {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "id")
-	private String id;
+	@Type(type = "uuid-char")
+	private UUID id;
 
 	@Column(name = "mnemonicsname")
 	private String mnemonicsName;
@@ -29,11 +33,11 @@ public class Mnemonic extends BaseEntity {
 	@JoinColumn(name = "lobid", referencedColumnName = "id")
 	private Lob lob;
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

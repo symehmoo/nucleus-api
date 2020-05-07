@@ -2,18 +2,18 @@ package org.symehmoo.nucleus.model;
 
 import java.util.UUID;
 
-public class LobDTO {
+public class AppComponentsDTO {
 	private UUID id;
-	private String lobName;
+	private String appComponentsName;
 
-	public LobDTO() {
+	public AppComponentsDTO() {
 		super();
 	}
 
-	public LobDTO(UUID id, String lobName) {
+	public AppComponentsDTO(UUID id, String appComponentsName) {
 		super();
 		this.id = id;
-		this.lobName = lobName;
+		this.appComponentsName = appComponentsName;
 	}
 
 	public UUID getId() {
@@ -24,12 +24,12 @@ public class LobDTO {
 		this.id = id;
 	}
 
-	public String getLobName() {
-		return lobName;
+	public String getAppComponentsName() {
+		return appComponentsName;
 	}
 
-	public void setLobName(String lobName) {
-		this.lobName = lobName;
+	public void setAppComponentsName(String appComponentsName) {
+		this.appComponentsName = appComponentsName;
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class LobDTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
+		result = prime * result + ((appComponentsName == null) ? 0 : appComponentsName.hashCode());
 		return result;
 	}
 
@@ -49,23 +49,23 @@ public class LobDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LobDTO other = (LobDTO) obj;
+		AppComponentsDTO other = (AppComponentsDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (lobName == null) {
-			if (other.lobName != null)
+		if (appComponentsName == null) {
+			if (other.appComponentsName != null)
 				return false;
-		} else if (!lobName.equals(other.lobName))
+		} else if (!appComponentsName.equals(other.appComponentsName))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "LobDTO [id=" + id + ", lobName=" + lobName + "]";
+		return "AppComponentsDTO [id=" + id + ", appComponentsName=" + appComponentsName + "]";
 	}
 
 }

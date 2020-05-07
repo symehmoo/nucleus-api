@@ -1,6 +1,7 @@
 package org.symehmoo.nucleus.entity;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "testconfig")
@@ -22,7 +24,8 @@ public class TestExecution extends BaseEntity {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "id")
-	private String id;
+	@Type(type = "uuid-char")
+	private UUID id;
 
 	@Column(name = "startTime")
 	private Date startTime;
@@ -43,11 +46,11 @@ public class TestExecution extends BaseEntity {
 	@JoinColumn(name = "testconfigid", referencedColumnName = "id")
 	private TestConfig testConfig;
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
