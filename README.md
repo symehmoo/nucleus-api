@@ -18,3 +18,5 @@ Test Config URL: create - http://localhost:8081/nucleus/testConfig/create
 										}
 				 search - http://localhost:8081/nucleus/testConfig/search
 						  http://localhost:8081/nucleus/testConfig/search?appComponentsName=A12&mnemonicsName=M2&lobName=testing
+
+Swagger UI URL: http://localhost:8081/nucleus/swagger-ui.html 
