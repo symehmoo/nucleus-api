@@ -6,7 +6,8 @@ id varchar(36) NOT NULL DEFAULT(UUID()),
 lobname varchar(45) NOT NULL,
 datecreated datetime,
 datemodified datetime,
-PRIMARY KEY(id)
+PRIMARY KEY(id),
+UNIQUE KEY(lobname) 
 );
 
 create table mnemonic(
@@ -16,7 +17,8 @@ datecreated datetime,
 datemodified datetime,
 lobid varchar(36) NOT NULL,
 PRIMARY KEY(id),
-FOREIGN KEY (lobid) REFERENCES lob(id)
+FOREIGN KEY (lobid) REFERENCES lob(id),
+UNIQUE KEY(mnemonicsname)
 );
 
 create table appcomponents(
@@ -26,7 +28,8 @@ datecreated datetime,
 datemodified datetime,
 mnemonicid varchar(36) NOT NULL,
 PRIMARY KEY(id),
-FOREIGN KEY (mnemonicid) REFERENCES mnemonic(id)
+FOREIGN KEY (mnemonicid) REFERENCES mnemonic(id),
+UNIQUE KEY(appcomponentsname)
 );
 
 create table testconfig(
@@ -45,7 +48,8 @@ appcomponentsid varchar(36) NOT NULL,
 PRIMARY KEY(id),
 FOREIGN KEY (lobid) REFERENCES lob(id),
 FOREIGN KEY (mnemonicid) REFERENCES mnemonic(id),
-FOREIGN KEY (appcomponentsid) REFERENCES appcomponents(id)
+FOREIGN KEY (appcomponentsid) REFERENCES appcomponents(id),
+UNIQUE KEY(testname)
 );
 
 create table testexecution(

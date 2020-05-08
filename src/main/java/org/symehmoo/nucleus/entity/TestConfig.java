@@ -49,7 +49,7 @@ public class TestConfig extends BaseEntity {
 	private Lob lob;
 
 	@ManyToOne
-	@JoinColumn(name = "mnemonicId", referencedColumnName = "id")
+	@JoinColumn(name = "mnemonicid", referencedColumnName = "id")
 	private Mnemonic mnemonic;
 
 	@ManyToOne
