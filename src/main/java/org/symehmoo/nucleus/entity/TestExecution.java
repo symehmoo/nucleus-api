@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "testconfig")
+@Table(name = "testexecution")
 public class TestExecution extends BaseEntity {
 
 	@Id
@@ -27,17 +27,17 @@ public class TestExecution extends BaseEntity {
 	@Type(type = "uuid-char")
 	private UUID id;
 
-	@Column(name = "startTime")
+	@Column(name = "starttime")
 	private Date startTime;
 
-	@Column(name = "endTime")
+	@Column(name = "endtime")
 	private Date endTime;
 
 	@Column(name = "runstatus")
 	private String runStatus;
 
 	@Column(name = "processid")
-	private Integer processId;
+	private Long processId;
 
 	@Column(name = "users_idusers")
 	private String users_idusers;
@@ -78,11 +78,11 @@ public class TestExecution extends BaseEntity {
 		this.runStatus = runStatus;
 	}
 
-	public Integer getProcessId() {
+	public Long getProcessId() {
 		return processId;
 	}
 
-	public void setProcessId(Integer processId) {
+	public void setProcessId(Long processId) {
 		this.processId = processId;
 	}
 
