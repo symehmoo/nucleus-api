@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +18,8 @@ public class MnemonicController {
 	private MnemonicService mnemonicService;
 
 	@GetMapping("/mnemonic")
-	public Collection<MnemonicDTO> getMnemonicData(Sort sort, @Nullable @RequestParam UUID lobId,
-			@Nullable @RequestParam String lobName) {
+	public Collection<MnemonicDTO> getMnemonicData(Sort sort, @RequestParam(required = false) UUID lobId,
+			@RequestParam(required = false) String lobName) {
 		return mnemonicService.getMnemonicDetails(sort, lobId, lobName);
 	}
 
