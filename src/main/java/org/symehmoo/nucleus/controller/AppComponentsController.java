@@ -19,7 +19,8 @@ public class AppComponentsController {
 	private AppComponentsService appComponentsService;
 
 	@GetMapping("/appcomponents")
-	public Collection<AppComponentsDTO> getAppComponentsData(Sort sort, @Nullable @RequestParam UUID mnemonicId) {
-		return appComponentsService.getAppComponentsDetails(sort, mnemonicId);
+	public Collection<AppComponentsDTO> getAppComponentsData(Sort sort, @Nullable @RequestParam UUID mnemonicId,
+			@Nullable @RequestParam String mnemonicsName) {
+		return appComponentsService.getAppComponentsDetails(sort, mnemonicId, mnemonicsName);
 	}
 }

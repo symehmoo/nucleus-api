@@ -8,6 +8,6 @@ import org.symehmoo.nucleus.model.AppComponentsDTO;
 
 public interface AppComponentsService {
 
-	public Collection<AppComponentsDTO> getAppComponentsDetails(Sort sort, UUID mnemonicId);
+	public Collection<AppComponentsDTO> getAppComponentsDetails(Sort sort, UUID mnemonicId, String mnemonicsName);
 
 }

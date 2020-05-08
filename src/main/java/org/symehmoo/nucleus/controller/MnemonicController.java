@@ -19,8 +19,9 @@ public class MnemonicController {
 	private MnemonicService mnemonicService;
 
 	@GetMapping("/mnemonic")
-	public Collection<MnemonicDTO> getMnemonicData(Sort sort, @Nullable @RequestParam UUID lobId) {
-		return mnemonicService.getMnemonicDetails(sort, lobId);
+	public Collection<MnemonicDTO> getMnemonicData(Sort sort, @Nullable @RequestParam UUID lobId,
+			@Nullable @RequestParam String lobName) {
+		return mnemonicService.getMnemonicDetails(sort, lobId, lobName);
 	}
 
 }

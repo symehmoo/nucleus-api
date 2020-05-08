@@ -8,6 +8,6 @@ import org.symehmoo.nucleus.model.MnemonicDTO;
 
 public interface MnemonicService {
 
-	public Collection<MnemonicDTO> getMnemonicDetails(Sort sort, UUID lobId);
+	public Collection<MnemonicDTO> getMnemonicDetails(Sort sort, UUID lobId, String lobName);
 
 }

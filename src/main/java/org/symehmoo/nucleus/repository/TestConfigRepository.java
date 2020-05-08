@@ -8,4 +8,6 @@ import org.symehmoo.nucleus.entity.TestConfig;
 @Repository
 public interface TestConfigRepository extends JpaRepository<TestConfig, String>, JpaSpecificationExecutor<TestConfig> {
 
+	public TestConfig findByTestName(String testName);
+
 }

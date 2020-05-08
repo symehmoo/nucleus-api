@@ -2,6 +2,7 @@ package org.symehmoo.nucleus.service.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,17 @@ public class LobServiceImpl implements LobService {
 
 	public Collection<LobDTO> getLobDetails(Sort sort) {
 		List<Lob> lobDatas = lobRepository.findAll(sort);
-		List<LobDTO> lobDtos = lobDatas.stream().map(lob -> {
+		List<LobDTO> lobDtos = lobDatas.stream().map(convertToDTOFunc()).collect(Collectors.toList());
+		return lobDtos;
+	}
+
+	private Function<Lob, LobDTO> convertToDTOFunc() {
+		Function<Lob, LobDTO> convertToDTOFunc = lob -> {
 			LobDTO lobDTO = new LobDTO();
 			lobDTO.setId(lob.getId());
 			lobDTO.setLobName(lob.getLobName());
 			return lobDTO;
-		}).collect(Collectors.toList());
-		return lobDtos;
+		};
+		return convertToDTOFunc;
 	}
 }

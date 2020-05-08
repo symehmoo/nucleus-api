@@ -2,13 +2,12 @@ package org.symehmoo.nucleus.service.impl;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.symehmoo.nucleus.entity.AppComponents;
 import org.symehmoo.nucleus.model.AppComponentsDTO;
@@ -30,18 +29,22 @@ public class AppComponentsServiceImpl implements AppComponentsService {
 		this.appComponentSpecifications = appComponentSpecifications;
 	}
 
-	public Collection<AppComponentsDTO> getAppComponentsDetails(Sort sort, UUID mnemonicId) {
-		Specification<AppComponents> mnemonicSpecification = null;
-		if (Objects.nonNull(mnemonicId)) {
-			mnemonicSpecification = appComponentSpecifications.getEqualSpecification("mnemonic.id", mnemonicId);
-		}
-		List<AppComponents> appComponentsDatas = appComponentsRepository.findAll(mnemonicSpecification, sort);
-		List<AppComponentsDTO> appComponentsDtos = appComponentsDatas.stream().map(appComponents -> {
+	public Collection<AppComponentsDTO> getAppComponentsDetails(Sort sort, UUID mnemonicId, String mnemonicsName) {
+		List<AppComponents> appComponentsDatas = appComponentsRepository
+				.findAll(appComponentSpecifications.createAppComponentsSpecification(mnemonicId, mnemonicsName), sort);
+		List<AppComponentsDTO> appComponentsDtos = appComponentsDatas.stream().map(convertToDTOFunc())
+				.collect(Collectors.toList());
+		return appComponentsDtos;
+
+	}
+
+	private Function<AppComponents, AppComponentsDTO> convertToDTOFunc() {
+		Function<AppComponents, AppComponentsDTO> convertToDTOFunc = appComponents -> {
 			AppComponentsDTO appComponentsDTO = new AppComponentsDTO();
 			appComponentsDTO.setId(appComponents.getId());
 			appComponentsDTO.setAppComponentsName(appComponents.getAppComponentsName());
 			return appComponentsDTO;
-		}).collect(Collectors.toList());
-		return appComponentsDtos;
+		};
+		return convertToDTOFunc;
 	}
 }
