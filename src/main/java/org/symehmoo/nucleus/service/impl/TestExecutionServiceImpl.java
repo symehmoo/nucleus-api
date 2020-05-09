@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,14 +56,14 @@ public class TestExecutionServiceImpl implements TestExecutionService {
 		String scriptCommand = MessageFormat.format(executionCmd, testConfig.getScriptName(),
 				testConfig.getScriptName(), testConfig.getGitRepoName(), testConfig.getGitRepoURL());
 		ProcessBuilder pb = new ProcessBuilder(scriptCommand.split(" "));
-		Process pr = pb.start();
-		System.out.println(pr.exitValue());
+		pb.start();
 		TestExecution testExecution = new TestExecution();
 		testExecution.setStartTime(new Date());
 		testExecution.setEndTime(new Date());
 		testExecution.setRunStatus(RunStatus.STARTED.toString());
 		testExecution.setTestConfig(testConfig);
 		testExecution.setUsers_idusers(testExecutionRunDTO.getUserid_users());
+		testExecution.setProcessId(RandomUtils.nextLong(1, 2000000));
 		testExecutionRepository.save(testExecution);
 		return convertToDTOFunc().apply(testExecution);
 	}

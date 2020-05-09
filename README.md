@@ -18,5 +18,15 @@ Test Config URL: create - http://localhost:8081/nucleus/test/create
 										}
 				 search - http://localhost:8081/nucleus/test/search
 						  http://localhost:8081/nucleus/test/search?appComponentsName=A12&mnemonicsName=M2&lobName=testing
+						  
+Running a test: POST request
+http://localhost:8081/nucleus/test/run 
+body 	{
+	 		"testName":"testing1"
+		}
+
+Test Execution list:
+http://localhost:8081/nucleus/testExecution
+http://localhost:8081/nucleus/testExecution?testName=testing1
 
 Swagger UI URL: http://localhost:8081/nucleus/swagger-ui.html 
