@@ -53,8 +53,8 @@ public class TestExecutionServiceImpl implements TestExecutionService {
 		if (Objects.isNull(testConfig)) {
 			throw new RuntimeException("Test with this name not found");
 		}
-		String scriptCommand = MessageFormat.format(executionCmd, testConfig.getScriptName(),
-				testConfig.getScriptName(), testConfig.getGitRepoName(), testConfig.getGitRepoURL());
+		String scriptCommand = MessageFormat.format(executionCmd, testConfig.getScriptName(), testConfig.getTestName(),
+				testConfig.getGitRepoName(), testConfig.getGitRepoURL());
 		ProcessBuilder pb = new ProcessBuilder(scriptCommand.split(" "));
 		pb.start();
 		TestExecution testExecution = new TestExecution();
