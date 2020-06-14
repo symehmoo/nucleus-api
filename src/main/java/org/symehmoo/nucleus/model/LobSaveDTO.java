@@ -1,30 +1,18 @@
 package org.symehmoo.nucleus.model;
 
-import java.util.UUID;
-
 /**
- * Data object to return lob details
+ * Data object used while saving lob
  */
-public class LobDTO {
-	private UUID id;
+public class LobSaveDTO {
 	private String lobName;
 
-	public LobDTO() {
+	public LobSaveDTO() {
 		super();
 	}
 
-	public LobDTO(UUID id, String lobName) {
+	public LobSaveDTO(String lobName) {
 		super();
-		this.id = id;
 		this.lobName = lobName;
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getLobName() {
@@ -39,7 +27,6 @@ public class LobDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
 		return result;
 	}
@@ -52,12 +39,7 @@ public class LobDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LobDTO other = (LobDTO) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+		LobSaveDTO other = (LobSaveDTO) obj;
 		if (lobName == null) {
 			if (other.lobName != null)
 				return false;
@@ -68,7 +50,7 @@ public class LobDTO {
 
 	@Override
 	public String toString() {
-		return "LobDTO [id=" + id + ", lobName=" + lobName + "]";
+		return "LobDTO [lobName=" + lobName + "]";
 	}
 
 }

@@ -2,6 +2,9 @@ package org.symehmoo.nucleus.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * Data object to show error messages
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorRto {
 

@@ -13,6 +13,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+/**
+ * Table mapping to store lob data
+ */
 @Entity
 @Table(name = "lob")
 public class Lob extends BaseEntity {

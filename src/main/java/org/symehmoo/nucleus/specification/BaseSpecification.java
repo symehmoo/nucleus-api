@@ -7,8 +7,22 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
+/**
+ * Base class to create specification object for filtering based on field name
+ * 
+ */
 public abstract class BaseSpecification<T> {
 
+	/**
+	 * This method will create a specification object for searching based on key
+	 * and value. This specification object will be passed to spring data
+	 * repository for filtering data. For nested field search keyname will be
+	 * like "nestedObject.fieldName"
+	 * 
+	 * @param key
+	 * @param value
+	 * @return {@link Specification} object
+	 */
 	public Specification<T> getEqualSpecification(String key, Object value) {
 		return new Specification<T>() {
 

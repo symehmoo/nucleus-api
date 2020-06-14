@@ -1,32 +1,20 @@
 package org.symehmoo.nucleus.model;
 
-import java.util.UUID;
-
 /**
- * Data object to return mnemonic details
+ * Data object used while saving mnemonic
  */
-public class MnemonicDTO {
-	private UUID id;
+public class MnemonicSaveDTO {
 	private String mnemonicName;
 	private String lobName;
 
-	public MnemonicDTO() {
+	public MnemonicSaveDTO() {
 		super();
 	}
 
-	public MnemonicDTO(UUID id, String mnemonicName, String lobName) {
+	public MnemonicSaveDTO(String mnemonicName, String lobName) {
 		super();
-		this.id = id;
 		this.mnemonicName = mnemonicName;
 		this.lobName = lobName;
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getMnemonicName() {
@@ -49,7 +37,6 @@ public class MnemonicDTO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((mnemonicName == null) ? 0 : mnemonicName.hashCode());
 		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
 		return result;
@@ -63,12 +50,7 @@ public class MnemonicDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MnemonicDTO other = (MnemonicDTO) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+		MnemonicSaveDTO other = (MnemonicSaveDTO) obj;
 		if (mnemonicName == null) {
 			if (other.mnemonicName != null)
 				return false;
@@ -84,7 +66,7 @@ public class MnemonicDTO {
 
 	@Override
 	public String toString() {
-		return "MnemonicDTO [id=" + id + ", mnemonicName=" + mnemonicName + ", lobName=" + lobName + "]";
+		return "MnemonicDTO [mnemonicName=" + mnemonicName + ", lobName=" + lobName + "]";
 	}
 
 }

@@ -10,6 +10,13 @@ import org.symehmoo.nucleus.model.TestExecutionSearchDTO;
 @Component
 public class TestExecutionSpecifications extends BaseSpecification<TestExecution> {
 
+	/**
+	 * This method will create specification object for filtering data in test
+	 * execution table based on testExecutionSearchDTO information
+	 * 
+	 * @param testExecutionSearchDTO
+	 * @return {@link Specification} object
+	 */
 	public Specification<TestExecution> createTestExecutionSpecification(
 			TestExecutionSearchDTO testExecutionSearchDTO) {
 		Specification<TestExecution> testExecutionSpecification = null;

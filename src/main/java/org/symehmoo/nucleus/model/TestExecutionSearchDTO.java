@@ -1,5 +1,8 @@
 package org.symehmoo.nucleus.model;
 
+/**
+ * Data object used to search test execution
+ */
 public class TestExecutionSearchDTO {
 	private String testName;
 

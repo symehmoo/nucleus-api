@@ -1,5 +1,8 @@
 package org.symehmoo.nucleus.model;
 
+/**
+ * Data object used to create test config record
+ */
 public class TestConfigCreationDTO {
 	private String testName;
 	private String gitRepoName;
@@ -7,22 +10,26 @@ public class TestConfigCreationDTO {
 	private String scriptName;
 	private String env;
 	private String userid_users;
-	private String appComponentName;
+	private String mnemonicName;
+	private String testType;
+	private Integer numberOfAgents;
 
 	public TestConfigCreationDTO() {
 		super();
 	}
 
 	public TestConfigCreationDTO(String gitRepoURL, String gitRepoName, String scriptName, String testName,
-			String appComponentName, String env, String userid_users) {
+			String mnemonicName, String env, String userid_users, String testType, Integer numberOfAgents) {
 		super();
 		this.gitRepoURL = gitRepoURL;
 		this.gitRepoName = gitRepoName;
 		this.scriptName = scriptName;
 		this.testName = testName;
-		this.appComponentName = appComponentName;
+		this.mnemonicName = mnemonicName;
 		this.env = env;
 		this.userid_users = userid_users;
+		this.testType = testType;
+		this.numberOfAgents = numberOfAgents;
 	}
 
 	public String getTestName() {
@@ -73,32 +80,51 @@ public class TestConfigCreationDTO {
 		this.userid_users = userid_users;
 	}
 
-	public String getAppComponentName() {
-		return appComponentName;
+	public String getMnemonicName() {
+		return mnemonicName;
 	}
 
-	public void setAppComponentName(String appComponentName) {
-		this.appComponentName = appComponentName;
+	public void setMnemonicName(String mnemonicName) {
+		this.mnemonicName = mnemonicName;
+	}
+
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
+	}
+
+	public Integer getNumberOfAgents() {
+		return numberOfAgents;
+	}
+
+	public void setNumberOfAgents(Integer numberOfAgents) {
+		this.numberOfAgents = numberOfAgents;
 	}
 
 	@Override
 	public String toString() {
 		return "TestConfigCreationDTO [testName=" + testName + ", gitRepoName=" + gitRepoName + ", gitRepoURL="
 				+ gitRepoURL + ", scriptName=" + scriptName + ", env=" + env + ", userid_users=" + userid_users
-				+ ", appComponentName=" + appComponentName + "]";
+				+ ", mnemonicName=" + mnemonicName + ", testType=" + testType + ", numberOfAgents=" + numberOfAgents
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((appComponentName == null) ? 0 : appComponentName.hashCode());
+		result = prime * result + ((mnemonicName == null) ? 0 : mnemonicName.hashCode());
 		result = prime * result + ((env == null) ? 0 : env.hashCode());
 		result = prime * result + ((gitRepoName == null) ? 0 : gitRepoName.hashCode());
 		result = prime * result + ((gitRepoURL == null) ? 0 : gitRepoURL.hashCode());
 		result = prime * result + ((scriptName == null) ? 0 : scriptName.hashCode());
 		result = prime * result + ((testName == null) ? 0 : testName.hashCode());
 		result = prime * result + ((userid_users == null) ? 0 : userid_users.hashCode());
+		result = prime * result + ((testType == null) ? 0 : testType.hashCode());
+		result = prime * result + ((numberOfAgents == null) ? 0 : numberOfAgents.hashCode());
 		return result;
 	}
 
@@ -111,10 +137,10 @@ public class TestConfigCreationDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		TestConfigCreationDTO other = (TestConfigCreationDTO) obj;
-		if (appComponentName == null) {
-			if (other.appComponentName != null)
+		if (mnemonicName == null) {
+			if (other.mnemonicName != null)
 				return false;
-		} else if (!appComponentName.equals(other.appComponentName))
+		} else if (!mnemonicName.equals(other.mnemonicName))
 			return false;
 		if (env == null) {
 			if (other.env != null)
@@ -145,6 +171,16 @@ public class TestConfigCreationDTO {
 			if (other.userid_users != null)
 				return false;
 		} else if (!userid_users.equals(other.userid_users))
+			return false;
+		if (numberOfAgents == null) {
+			if (other.numberOfAgents != null)
+				return false;
+		} else if (!numberOfAgents.equals(other.numberOfAgents))
+			return false;
+		if (testType == null) {
+			if (other.testType != null)
+				return false;
+		} else if (!testType.equals(other.testType))
 			return false;
 		return true;
 	}

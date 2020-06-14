@@ -10,6 +10,13 @@ import org.symehmoo.nucleus.model.TestConfigSearchDTO;
 @Component
 public class TestConfigSpecifications extends BaseSpecification<TestConfig> {
 
+	/**
+	 * This method will create specification object for filtering data in test
+	 * config table based on testConfigSearchDTO information
+	 * 
+	 * @param testConfigSearchDTO
+	 * @return {@link Specification} object
+	 */
 	public Specification<TestConfig> createTestConfigSpecification(TestConfigSearchDTO testConfigSearchDTO) {
 		Specification<TestConfig> testConfigSpecification = null;
 		if (Objects.nonNull(testConfigSearchDTO.getTestName())) {
@@ -27,6 +34,14 @@ public class TestConfigSpecifications extends BaseSpecification<TestConfig> {
 		if (Objects.nonNull(testConfigSearchDTO.getAppComponentsName())) {
 			testConfigSpecification = this.getEqualSpecification("appComponents.appComponentsName",
 					testConfigSearchDTO.getAppComponentsName()).and(testConfigSpecification);
+		}
+		if (Objects.nonNull(testConfigSearchDTO.getTestType())) {
+			testConfigSpecification = this.getEqualSpecification("testType", testConfigSearchDTO.getTestType())
+					.and(testConfigSpecification);
+		}
+		if (Objects.nonNull(testConfigSearchDTO.getUserid_users())) {
+			testConfigSpecification = this.getEqualSpecification("userid_users", testConfigSearchDTO.getUserid_users())
+					.and(testConfigSpecification);
 		}
 		return testConfigSpecification;
 	}

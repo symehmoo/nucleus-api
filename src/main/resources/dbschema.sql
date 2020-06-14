@@ -29,7 +29,7 @@ datemodified datetime,
 mnemonicid varchar(36) NOT NULL,
 PRIMARY KEY(id),
 FOREIGN KEY (mnemonicid) REFERENCES mnemonic(id),
-UNIQUE KEY(appcomponentsname)
+UNIQUE KEY(appcomponentsname,mnemonicid)
 );
 
 create table testconfig(
@@ -45,6 +45,8 @@ datemodified datetime,
 lobid varchar(36) NOT NULL,
 mnemonicId varchar(36) NOT NULL,
 appcomponentsid varchar(36) NOT NULL,
+numberofagents int,
+testtype varchar(45),
 PRIMARY KEY(id),
 FOREIGN KEY (lobid) REFERENCES lob(id),
 FOREIGN KEY (mnemonicid) REFERENCES mnemonic(id),
@@ -65,3 +67,4 @@ testconfigid varchar(36) NOT NULL,
 PRIMARY KEY(id),
 FOREIGN KEY (testconfigid) REFERENCES testconfig(id)
 );
+

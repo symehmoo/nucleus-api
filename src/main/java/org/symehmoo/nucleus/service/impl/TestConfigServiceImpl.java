@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.symehmoo.nucleus.entity.AppComponents;
+import org.symehmoo.nucleus.entity.Mnemonic;
 import org.symehmoo.nucleus.entity.TestConfig;
 import org.symehmoo.nucleus.model.TestConfigCreationDTO;
 import org.symehmoo.nucleus.model.TestConfigDTO;
 import org.symehmoo.nucleus.model.TestConfigSearchDTO;
 import org.symehmoo.nucleus.repository.AppComponentsRepository;
+import org.symehmoo.nucleus.repository.MnemonicRepository;
 import org.symehmoo.nucleus.repository.TestConfigRepository;
 import org.symehmoo.nucleus.service.TestConfigService;
 import org.symehmoo.nucleus.specification.TestConfigSpecifications;
@@ -29,25 +31,39 @@ public class TestConfigServiceImpl implements TestConfigService {
 
 	private final TestConfigSpecifications testConfigSpecifications;
 
+	private final MnemonicRepository mnemonicRepository;
+
 	@Autowired
 	public TestConfigServiceImpl(TestConfigRepository testConfigRepository,
-			TestConfigSpecifications testConfigSpecifications, AppComponentsRepository appComponentsRepository) {
+			TestConfigSpecifications testConfigSpecifications, AppComponentsRepository appComponentsRepository,
+			MnemonicRepository mnemonicRepository) {
 		this.testConfigRepository = testConfigRepository;
 		this.testConfigSpecifications = testConfigSpecifications;
 		this.appComponentsRepository = appComponentsRepository;
+		this.mnemonicRepository = mnemonicRepository;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public TestConfigDTO createTest(TestConfigCreationDTO testConfigCreationDTO) {
 		validateRequest(testConfigCreationDTO);
-		TestConfig testConfig = testConfigRepository.findByTestName(testConfigCreationDTO.getTestName());
+		TestConfig testConfig = testConfigRepository.findByTestNameIgnoreCase(testConfigCreationDTO.getTestName());
 		if (Objects.nonNull(testConfig)) {
 			throw new RuntimeException("Test with this name already exists");
 		}
-		AppComponents appComponents = appComponentsRepository
-				.findByAppComponentsName(testConfigCreationDTO.getAppComponentName());
+		Mnemonic mnemonic = mnemonicRepository.findByMnemonicsNameIgnoreCase(testConfigCreationDTO.getMnemonicName());
+		if (Objects.isNull(mnemonic)) {
+			throw new RuntimeException("Mnemonic with this name not found");
+		}
+		AppComponents appComponents = appComponentsRepository.findByMnemonic_IdAndAppComponentsNameIgnoreCase(
+				mnemonic.getId(), testConfigCreationDTO.getGitRepoName());
 		if (Objects.isNull(appComponents)) {
-			throw new RuntimeException("App component not found with this name");
+			appComponents = new AppComponents();
+			appComponents.setMnemonic(mnemonic);
+			appComponents.setAppComponentsName(testConfigCreationDTO.getGitRepoName());
+			appComponentsRepository.save(appComponents);
 		}
 		TestConfig newTestConfig = new TestConfig();
 		newTestConfig.setAppComponents(appComponents);
@@ -61,14 +77,22 @@ public class TestConfigServiceImpl implements TestConfigService {
 		newTestConfig.setScriptName(testConfigCreationDTO.getScriptName());
 		newTestConfig.setTestName(testConfigCreationDTO.getTestName());
 		newTestConfig.setUsers_idusers(testConfigCreationDTO.getUserid_users());
+		newTestConfig.setTestType(testConfigCreationDTO.getTestType());
+		newTestConfig.setNumberOfAgents(testConfigCreationDTO.getNumberOfAgents());
 		testConfigRepository.save(newTestConfig);
 		return convertToDTOFunc().apply(newTestConfig);
 	}
 
+	/**
+	 * Method to validate parameters in post request object
+	 * 
+	 * @param testConfigCreationDTO
+	 */
 	private void validateRequest(TestConfigCreationDTO testConfigCreationDTO) {
 		if (StringUtils.isBlank(testConfigCreationDTO.getTestName())) {
 			throw new RuntimeException("Test name cannot be null");
 		}
+
 		if (StringUtils.isBlank(testConfigCreationDTO.getScriptName())) {
 			throw new RuntimeException("Script name cannot be null");
 		}
@@ -76,15 +100,20 @@ public class TestConfigServiceImpl implements TestConfigService {
 			throw new RuntimeException("Git repo name cannot be null");
 		}
 
-		if (StringUtils.isBlank(testConfigCreationDTO.getAppComponentName())) {
-			throw new RuntimeException("App components name cannot be null");
+		if (StringUtils.isBlank(testConfigCreationDTO.getMnemonicName())) {
+			throw new RuntimeException("Mnemonic name cannot be null");
 		}
+
 		if (StringUtils.isBlank(testConfigCreationDTO.getGitRepoURL())) {
 			throw new RuntimeException("Git repo url cannot be null");
 		}
-
 	}
 
+	/**
+	 * Function to convert Entity object To DTO object
+	 * 
+	 * @return {@link Function}
+	 */
 	private Function<TestConfig, TestConfigDTO> convertToDTOFunc() {
 		Function<TestConfig, TestConfigDTO> convertToDTOFunc = testConfig -> {
 			TestConfigDTO testConfigDTO = new TestConfigDTO();
@@ -98,11 +127,16 @@ public class TestConfigServiceImpl implements TestConfigService {
 			testConfigDTO.setScriptName(testConfig.getScriptName());
 			testConfigDTO.setTestName(testConfig.getTestName());
 			testConfigDTO.setUserid_users(testConfig.getUsers_idusers());
+			testConfigDTO.setTestType(testConfig.getTestType());
+			testConfigDTO.setNumberOfAgents(testConfig.getNumberOfAgents());
 			return testConfigDTO;
 		};
 		return convertToDTOFunc;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Collection<TestConfigDTO> searchTest(Sort sort, TestConfigSearchDTO testConfigSearchDTO) {
 		List<TestConfig> testConfigDatas = testConfigRepository

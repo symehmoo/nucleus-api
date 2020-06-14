@@ -10,6 +10,9 @@ import org.symehmoo.nucleus.model.TestExecutionDTO;
 import org.symehmoo.nucleus.model.TestExecutionSearchDTO;
 import org.symehmoo.nucleus.service.TestExecutionService;
 
+/**
+ * Controller to expose test execution search api
+ */
 @RestController
 public class TestExecutionController {
 

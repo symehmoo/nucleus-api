@@ -15,6 +15,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+/**
+ * Table mapping to store app component data
+ */
 @Entity
 @Table(name = "appcomponents")
 public class AppComponents extends BaseEntity {

@@ -1,21 +1,29 @@
 package org.symehmoo.nucleus.model;
 
+/**
+ * Data object used in searching test config records
+ */
 public class TestConfigSearchDTO {
 	private String lobName;
 	private String mnemonicsName;
 	private String appComponentsName;
 	private String testName;
+	private String testType;
+	private String userid_users;
 
 	public TestConfigSearchDTO() {
 		super();
 	}
 
-	public TestConfigSearchDTO(String lobName, String mnemonicsName, String appComponentsName, String testName) {
+	public TestConfigSearchDTO(String lobName, String mnemonicsName, String appComponentsName, String testName,
+			String testType, String userid_users) {
 		super();
 		this.lobName = lobName;
 		this.mnemonicsName = mnemonicsName;
 		this.appComponentsName = appComponentsName;
 		this.testName = testName;
+		this.testType = testType;
+		this.userid_users = userid_users;
 	}
 
 	public String getLobName() {
@@ -50,10 +58,27 @@ public class TestConfigSearchDTO {
 		this.testName = testName;
 	}
 
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
+	}
+
+	public String getUserid_users() {
+		return userid_users;
+	}
+
+	public void setUserid_users(String userid_users) {
+		this.userid_users = userid_users;
+	}
+
 	@Override
 	public String toString() {
 		return "TestConfigSearchDTO [lobName=" + lobName + ", mnemonicsName=" + mnemonicsName + ", appComponentsName="
-				+ appComponentsName + ", testName=" + testName + "]";
+				+ appComponentsName + ", testName=" + testName + ", testType=" + testType + ", userid_users="
+				+ userid_users + "]";
 	}
 
 	@Override
@@ -64,6 +89,8 @@ public class TestConfigSearchDTO {
 		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
 		result = prime * result + ((mnemonicsName == null) ? 0 : mnemonicsName.hashCode());
 		result = prime * result + ((testName == null) ? 0 : testName.hashCode());
+		result = prime * result + ((testType == null) ? 0 : testType.hashCode());
+		result = prime * result + ((userid_users == null) ? 0 : userid_users.hashCode());
 		return result;
 	}
 
@@ -95,6 +122,16 @@ public class TestConfigSearchDTO {
 			if (other.testName != null)
 				return false;
 		} else if (!testName.equals(other.testName))
+			return false;
+		if (testType == null) {
+			if (other.testType != null)
+				return false;
+		} else if (!testType.equals(other.testType))
+			return false;
+		if (userid_users == null) {
+			if (other.userid_users != null)
+				return false;
+		} else if (!userid_users.equals(other.userid_users))
 			return false;
 		return true;
 	}

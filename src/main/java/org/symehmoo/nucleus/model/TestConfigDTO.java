@@ -2,6 +2,9 @@ package org.symehmoo.nucleus.model;
 
 import java.util.UUID;
 
+/**
+ * Data object to return test config details
+ */
 public class TestConfigDTO {
 	private UUID id;
 	private String testName;
@@ -13,13 +16,16 @@ public class TestConfigDTO {
 	private String appComponentName;
 	private String mnemonicsName;
 	private String lobName;
+	private String testType;
+	private Integer numberOfAgents;
 
 	public TestConfigDTO() {
 		super();
 	}
 
 	public TestConfigDTO(UUID id, String testName, String gitRepoName, String gitRepoURL, String scriptName, String env,
-			String userid_users, String appComponentName, String mnemonicsName, String lobName) {
+			String userid_users, String appComponentName, String mnemonicsName, String lobName, String testType,
+			Integer numberOfAgents) {
 		super();
 		this.id = id;
 		this.testName = testName;
@@ -31,6 +37,8 @@ public class TestConfigDTO {
 		this.appComponentName = appComponentName;
 		this.mnemonicsName = mnemonicsName;
 		this.lobName = lobName;
+		this.testType = testType;
+		this.numberOfAgents = numberOfAgents;
 	}
 
 	public UUID getId() {
@@ -113,12 +121,28 @@ public class TestConfigDTO {
 		this.lobName = lobName;
 	}
 
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
+	}
+
+	public Integer getNumberOfAgents() {
+		return numberOfAgents;
+	}
+
+	public void setNumberOfAgents(Integer numberOfAgents) {
+		this.numberOfAgents = numberOfAgents;
+	}
+
 	@Override
 	public String toString() {
 		return "TestConfigDTO [id=" + id + ", testName=" + testName + ", gitRepoName=" + gitRepoName + ", gitRepoURL="
 				+ gitRepoURL + ", scriptName=" + scriptName + ", env=" + env + ", userid_users=" + userid_users
 				+ ", appComponentName=" + appComponentName + ", mnemonicsName=" + mnemonicsName + ", lobName=" + lobName
-				+ "]";
+				+ ", testType=" + testType + ", numberOfAgents=" + numberOfAgents + "]";
 	}
 
 	@Override
@@ -135,6 +159,8 @@ public class TestConfigDTO {
 		result = prime * result + ((scriptName == null) ? 0 : scriptName.hashCode());
 		result = prime * result + ((testName == null) ? 0 : testName.hashCode());
 		result = prime * result + ((userid_users == null) ? 0 : userid_users.hashCode());
+		result = prime * result + ((testType == null) ? 0 : testType.hashCode());
+		result = prime * result + ((numberOfAgents == null) ? 0 : numberOfAgents.hashCode());
 		return result;
 	}
 
@@ -196,6 +222,16 @@ public class TestConfigDTO {
 			if (other.userid_users != null)
 				return false;
 		} else if (!userid_users.equals(other.userid_users))
+			return false;
+		if (testType == null) {
+			if (other.testType != null)
+				return false;
+		} else if (!testType.equals(other.testType))
+			return false;
+		if (numberOfAgents == null) {
+			if (other.numberOfAgents != null)
+				return false;
+		} else if (!numberOfAgents.equals(other.numberOfAgents))
 			return false;
 		return true;
 	}

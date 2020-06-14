@@ -15,6 +15,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+/**
+ * Table mapping to store test config data
+ */
 @Entity
 @Table(name = "testconfig")
 public class TestConfig extends BaseEntity {
@@ -40,6 +43,12 @@ public class TestConfig extends BaseEntity {
 
 	@Column(name = "env")
 	private String env;
+
+	@Column(name = "numberofagents")
+	private Integer numberOfAgents;
+
+	@Column(name = "testtype")
+	private String testType;
 
 	@Column(name = "users_idusers")
 	private String users_idusers;
@@ -136,10 +145,27 @@ public class TestConfig extends BaseEntity {
 		this.appComponents = appComponents;
 	}
 
+	public Integer getNumberOfAgents() {
+		return numberOfAgents;
+	}
+
+	public void setNumberOfAgents(Integer numberOfAgents) {
+		this.numberOfAgents = numberOfAgents;
+	}
+
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
+	}
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(getId()).append(getTestName()).append(getGitRepoName())
-				.append(getGitRepoURL()).append(getScriptName()).append(getEnv()).append(getUsers_idusers()).build();
+				.append(getGitRepoURL()).append(getScriptName()).append(getEnv()).append(getUsers_idusers())
+				.append(getTestType()).append(getNumberOfAgents()).build();
 	}
 
 	@Override
@@ -151,7 +177,8 @@ public class TestConfig extends BaseEntity {
 			return new EqualsBuilder().append(getId(), entity.getId()).append(getTestName(), entity.getTestName())
 					.append(getGitRepoName(), entity.getGitRepoName()).append(getGitRepoURL(), entity.getGitRepoURL())
 					.append(getScriptName(), entity.getScriptName()).append(getEnv(), entity.getEnv())
-					.append(getUsers_idusers(), entity.getUsers_idusers()).build();
+					.append(getUsers_idusers(), entity.getUsers_idusers()).append(getTestType(), entity.getTestType())
+					.append(getNumberOfAgents(), entity.getNumberOfAgents()).build();
 		} else {
 			return false;
 		}

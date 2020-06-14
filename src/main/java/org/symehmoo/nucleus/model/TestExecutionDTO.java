@@ -2,6 +2,9 @@ package org.symehmoo.nucleus.model;
 
 import java.util.UUID;
 
+/**
+ * Data object to return test execution details
+ */
 public class TestExecutionDTO {
 	private UUID id;
 	private String testName;

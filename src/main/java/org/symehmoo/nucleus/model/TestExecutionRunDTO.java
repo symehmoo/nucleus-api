@@ -1,5 +1,8 @@
 package org.symehmoo.nucleus.model;
 
+/**
+ * Data object used in running a test
+ */
 public class TestExecutionRunDTO {
 	private String testName;
 	private String userid_users;
