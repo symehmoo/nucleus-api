@@ -42,8 +42,8 @@ public class TestExecution extends BaseEntity {
 	@Column(name = "processid")
 	private Long processId;
 
-	@Column(name = "users_idusers")
-	private String users_idusers;
+	@Column(name = "userid_users")
+	private String userid_users;
 
 	@ManyToOne
 	@JoinColumn(name = "testconfigid", referencedColumnName = "id")
@@ -89,12 +89,12 @@ public class TestExecution extends BaseEntity {
 		this.processId = processId;
 	}
 
-	public String getUsers_idusers() {
-		return users_idusers;
+	public String getUserid_users() {
+		return userid_users;
 	}
 
-	public void setUsers_idusers(String users_idusers) {
-		this.users_idusers = users_idusers;
+	public void setUserid_users(String userid_users) {
+		this.userid_users = userid_users;
 	}
 
 	public TestConfig getTestConfig() {
@@ -108,7 +108,7 @@ public class TestExecution extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(getId()).append(getStartTime()).append(getEndTime()).append(getRunStatus())
-				.append(getProcessId()).append(getUsers_idusers()).build();
+				.append(getProcessId()).append(getUserid_users()).build();
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class TestExecution extends BaseEntity {
 			TestExecution entity = (TestExecution) obj;
 			return new EqualsBuilder().append(getId(), entity.getId()).append(getStartTime(), entity.getStartTime())
 					.append(getEndTime(), entity.getEndTime()).append(getRunStatus(), entity.getRunStatus())
-					.append(getProcessId(), entity.getProcessId()).append(getUsers_idusers(), entity.getUsers_idusers())
+					.append(getProcessId(), entity.getProcessId()).append(getUserid_users(), entity.getUserid_users())
 					.build();
 		} else {
 			return false;

@@ -12,7 +12,7 @@ import org.symehmoo.nucleus.entity.AppComponents;
  */
 @Repository
 public interface AppComponentsRepository
-		extends JpaRepository<AppComponents, String>, JpaSpecificationExecutor<AppComponents> {
+		extends JpaRepository<AppComponents, UUID>, JpaSpecificationExecutor<AppComponents> {
 
 	/**
 	 * Method to find app component record by mnemonic id and app component name

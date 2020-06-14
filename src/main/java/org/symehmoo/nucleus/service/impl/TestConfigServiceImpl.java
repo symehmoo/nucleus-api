@@ -3,6 +3,7 @@ package org.symehmoo.nucleus.service.impl;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import org.symehmoo.nucleus.entity.TestConfig;
 import org.symehmoo.nucleus.model.TestConfigCreationDTO;
 import org.symehmoo.nucleus.model.TestConfigDTO;
 import org.symehmoo.nucleus.model.TestConfigSearchDTO;
+import org.symehmoo.nucleus.model.TestConfigUpdateDTO;
 import org.symehmoo.nucleus.repository.AppComponentsRepository;
 import org.symehmoo.nucleus.repository.MnemonicRepository;
 import org.symehmoo.nucleus.repository.TestConfigRepository;
@@ -76,7 +78,7 @@ public class TestConfigServiceImpl implements TestConfigService {
 		}
 		newTestConfig.setScriptName(testConfigCreationDTO.getScriptName());
 		newTestConfig.setTestName(testConfigCreationDTO.getTestName());
-		newTestConfig.setUsers_idusers(testConfigCreationDTO.getUserid_users());
+		newTestConfig.setUserid_users(testConfigCreationDTO.getUserid_users());
 		newTestConfig.setTestType(testConfigCreationDTO.getTestType());
 		newTestConfig.setNumberOfAgents(testConfigCreationDTO.getNumberOfAgents());
 		testConfigRepository.save(newTestConfig);
@@ -126,7 +128,7 @@ public class TestConfigServiceImpl implements TestConfigService {
 			testConfigDTO.setMnemonicsName(testConfig.getMnemonic().getMnemonicsName());
 			testConfigDTO.setScriptName(testConfig.getScriptName());
 			testConfigDTO.setTestName(testConfig.getTestName());
-			testConfigDTO.setUserid_users(testConfig.getUsers_idusers());
+			testConfigDTO.setUserid_users(testConfig.getUserid_users());
 			testConfigDTO.setTestType(testConfig.getTestType());
 			testConfigDTO.setNumberOfAgents(testConfig.getNumberOfAgents());
 			return testConfigDTO;
@@ -144,5 +146,49 @@ public class TestConfigServiceImpl implements TestConfigService {
 		List<TestConfigDTO> testConfigDtos = testConfigDatas.stream().map(convertToDTOFunc())
 				.collect(Collectors.toList());
 		return testConfigDtos;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void updateTest(String testConfigId, TestConfigUpdateDTO testConfigUpdateDTO) {
+		validatePutRequest(testConfigId, testConfigUpdateDTO);
+		UUID testConfigIdUUID = null;
+		try {
+			testConfigIdUUID = UUID.fromString(testConfigId);
+		} catch (Exception ex) {
+			throw new RuntimeException("Not a valid test id");
+		}
+		TestConfig testConfig = testConfigRepository.findByTestNameIgnoreCase(testConfigUpdateDTO.getTestName());
+		if (Objects.nonNull(testConfig) && !testConfig.getId().equals(testConfigIdUUID)) {
+			throw new RuntimeException("Test name already in use. Please try other name");
+		}
+		TestConfig test = testConfigRepository.findById(testConfigIdUUID).orElse(null);
+		if (Objects.isNull(test)) {
+			throw new RuntimeException("Test with this id not found");
+		}
+		test.setTestName(testConfigUpdateDTO.getTestName());
+		test.setScriptName(testConfigUpdateDTO.getScriptName());
+		test.setNumberOfAgents(testConfigUpdateDTO.getNumberOfAgents());
+		testConfigRepository.save(test);
+	}
+
+	/**
+	 * Method to validate parameters in update request object
+	 * 
+	 * @param testConfigUpdateDTO
+	 */
+	private void validatePutRequest(String testConfigId, TestConfigUpdateDTO testConfigUpdateDTO) {
+		if (StringUtils.isBlank(testConfigId)) {
+			throw new RuntimeException("Test config id cannot be null");
+		}
+		if (StringUtils.isBlank(testConfigUpdateDTO.getTestName())) {
+			throw new RuntimeException("Test name cannot be null");
+		}
+
+		if (StringUtils.isBlank(testConfigUpdateDTO.getScriptName())) {
+			throw new RuntimeException("Script name cannot be null");
+		}
 	}
 }

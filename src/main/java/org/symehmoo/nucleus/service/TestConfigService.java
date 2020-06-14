@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.symehmoo.nucleus.model.TestConfigCreationDTO;
 import org.symehmoo.nucleus.model.TestConfigDTO;
 import org.symehmoo.nucleus.model.TestConfigSearchDTO;
+import org.symehmoo.nucleus.model.TestConfigUpdateDTO;
 
 public interface TestConfigService {
 
@@ -29,4 +30,10 @@ public interface TestConfigService {
 	 */
 	public Collection<TestConfigDTO> searchTest(Sort sort, TestConfigSearchDTO testConfigSearchDTO);
 
+	/**
+	 * Method to update test record.
+	 * 
+	 * @param testConfigUpdateDTO
+	 */
+	public void updateTest(String testConfigId, TestConfigUpdateDTO testConfigUpdateDTO);
 }

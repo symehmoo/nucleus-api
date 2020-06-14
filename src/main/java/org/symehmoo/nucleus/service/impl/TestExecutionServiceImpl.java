@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -38,6 +40,8 @@ public class TestExecutionServiceImpl implements TestExecutionService {
 	@Value("${script.execution.cmd}")
 	private String executionCmd;
 
+	private static final Logger logger = LogManager.getLogger(TestExecutionServiceImpl.class);
+
 	@Autowired
 	public TestExecutionServiceImpl(TestExecutionRepository testExecutionRepository,
 			TestConfigRepository testConfigRepository, TestExecutionSpecifications testExecutionSpecifications) {
@@ -61,13 +65,20 @@ public class TestExecutionServiceImpl implements TestExecutionService {
 				testConfig.getGitRepoName(), testConfig.getGitRepoURL());
 		ProcessBuilder pb = new ProcessBuilder(scriptCommand.split(" "));
 		// executing command
-		pb.start();
+		RunStatus runStatus = RunStatus.STARTED;
+		try {
+			pb.start();
+		} catch (Exception ex) {
+			logger.debug("Exception in starting test");
+			logger.error(ex);
+			runStatus = RunStatus.FAILED;
+		}
 		TestExecution testExecution = new TestExecution();
 		testExecution.setStartTime(new Date());
 		testExecution.setEndTime(new Date());
-		testExecution.setRunStatus(RunStatus.STARTED.toString());
+		testExecution.setRunStatus(runStatus.toString());
 		testExecution.setTestConfig(testConfig);
-		testExecution.setUsers_idusers(testExecutionRunDTO.getUserid_users());
+		testExecution.setUserid_users(testExecutionRunDTO.getUserid_users());
 		testExecution.setProcessId(RandomUtils.nextLong(1, 2000000));
 		testExecutionRepository.save(testExecution);
 		return convertToDTOFunc().apply(testExecution);

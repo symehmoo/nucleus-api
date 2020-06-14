@@ -50,8 +50,8 @@ public class TestConfig extends BaseEntity {
 	@Column(name = "testtype")
 	private String testType;
 
-	@Column(name = "users_idusers")
-	private String users_idusers;
+	@Column(name = "userid_users")
+	private String userid_users;
 
 	@ManyToOne
 	@JoinColumn(name = "lobid", referencedColumnName = "id")
@@ -113,12 +113,12 @@ public class TestConfig extends BaseEntity {
 		this.env = env;
 	}
 
-	public String getUsers_idusers() {
-		return users_idusers;
+	public String getUserid_users() {
+		return userid_users;
 	}
 
-	public void setUsers_idusers(String users_idusers) {
-		this.users_idusers = users_idusers;
+	public void setUserid_users(String userid_users) {
+		this.userid_users = userid_users;
 	}
 
 	public Lob getLob() {
@@ -164,7 +164,7 @@ public class TestConfig extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(getId()).append(getTestName()).append(getGitRepoName())
-				.append(getGitRepoURL()).append(getScriptName()).append(getEnv()).append(getUsers_idusers())
+				.append(getGitRepoURL()).append(getScriptName()).append(getEnv()).append(getUserid_users())
 				.append(getTestType()).append(getNumberOfAgents()).build();
 	}
 
@@ -177,7 +177,7 @@ public class TestConfig extends BaseEntity {
 			return new EqualsBuilder().append(getId(), entity.getId()).append(getTestName(), entity.getTestName())
 					.append(getGitRepoName(), entity.getGitRepoName()).append(getGitRepoURL(), entity.getGitRepoURL())
 					.append(getScriptName(), entity.getScriptName()).append(getEnv(), entity.getEnv())
-					.append(getUsers_idusers(), entity.getUsers_idusers()).append(getTestType(), entity.getTestType())
+					.append(getUserid_users(), entity.getUserid_users()).append(getTestType(), entity.getTestType())
 					.append(getNumberOfAgents(), entity.getNumberOfAgents()).build();
 		} else {
 			return false;
