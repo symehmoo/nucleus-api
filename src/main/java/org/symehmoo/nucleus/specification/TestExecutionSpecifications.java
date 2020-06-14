@@ -24,6 +24,12 @@ public class TestExecutionSpecifications extends BaseSpecification<TestExecution
 			testExecutionSpecification = getEqualSpecification("testConfig.testName",
 					testExecutionSearchDTO.getTestName());
 		}
+		if (Objects.nonNull(testExecutionSearchDTO.getRunStatus())) {
+			testExecutionSpecification = getEqualSpecification("runStatus", testExecutionSearchDTO.getRunStatus());
+		}
+		if (Objects.nonNull(testExecutionSearchDTO.getExecutionId())) {
+			testExecutionSpecification = getEqualSpecification("id", testExecutionSearchDTO.getExecutionId());
+		}
 		return testExecutionSpecification;
 	}
 }

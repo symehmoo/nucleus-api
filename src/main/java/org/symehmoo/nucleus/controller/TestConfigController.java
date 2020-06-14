@@ -2,6 +2,7 @@ package org.symehmoo.nucleus.controller;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -64,7 +65,7 @@ public class TestConfigController {
 	 */
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	@PutMapping("/modifyTest/{testConfigId}")
-	public void modifyTest(@PathVariable(name = "testConfigId") String testConfigId,
+	public void modifyTest(@PathVariable(name = "testConfigId") UUID testConfigId,
 			@RequestBody TestConfigUpdateDTO testConfigUpdateDTO) {
 		testConfigService.updateTest(testConfigId, testConfigUpdateDTO);
 	}

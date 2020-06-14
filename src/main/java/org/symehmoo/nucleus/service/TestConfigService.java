@@ -1,6 +1,7 @@
 package org.symehmoo.nucleus.service;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.data.domain.Sort;
 import org.symehmoo.nucleus.model.TestConfigCreationDTO;
@@ -35,5 +36,5 @@ public interface TestConfigService {
 	 * 
 	 * @param testConfigUpdateDTO
 	 */
-	public void updateTest(String testConfigId, TestConfigUpdateDTO testConfigUpdateDTO);
+	public void updateTest(UUID testConfigId, TestConfigUpdateDTO testConfigUpdateDTO);
 }

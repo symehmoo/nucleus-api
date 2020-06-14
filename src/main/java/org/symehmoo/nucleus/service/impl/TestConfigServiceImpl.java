@@ -152,19 +152,13 @@ public class TestConfigServiceImpl implements TestConfigService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateTest(String testConfigId, TestConfigUpdateDTO testConfigUpdateDTO) {
+	public void updateTest(UUID testConfigId, TestConfigUpdateDTO testConfigUpdateDTO) {
 		validatePutRequest(testConfigId, testConfigUpdateDTO);
-		UUID testConfigIdUUID = null;
-		try {
-			testConfigIdUUID = UUID.fromString(testConfigId);
-		} catch (Exception ex) {
-			throw new RuntimeException("Not a valid test id");
-		}
 		TestConfig testConfig = testConfigRepository.findByTestNameIgnoreCase(testConfigUpdateDTO.getTestName());
-		if (Objects.nonNull(testConfig) && !testConfig.getId().equals(testConfigIdUUID)) {
+		if (Objects.nonNull(testConfig) && !testConfig.getId().equals(testConfigId)) {
 			throw new RuntimeException("Test name already in use. Please try other name");
 		}
-		TestConfig test = testConfigRepository.findById(testConfigIdUUID).orElse(null);
+		TestConfig test = testConfigRepository.findById(testConfigId).orElse(null);
 		if (Objects.isNull(test)) {
 			throw new RuntimeException("Test with this id not found");
 		}
@@ -179,8 +173,8 @@ public class TestConfigServiceImpl implements TestConfigService {
 	 * 
 	 * @param testConfigUpdateDTO
 	 */
-	private void validatePutRequest(String testConfigId, TestConfigUpdateDTO testConfigUpdateDTO) {
-		if (StringUtils.isBlank(testConfigId)) {
+	private void validatePutRequest(UUID testConfigId, TestConfigUpdateDTO testConfigUpdateDTO) {
+		if (Objects.isNull(testConfigId)) {
 			throw new RuntimeException("Test config id cannot be null");
 		}
 		if (StringUtils.isBlank(testConfigUpdateDTO.getTestName())) {
