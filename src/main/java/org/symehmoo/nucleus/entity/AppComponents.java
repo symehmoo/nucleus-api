@@ -36,6 +36,9 @@ public class AppComponents extends BaseEntity {
 	@JoinColumn(name = "mnemonicid", referencedColumnName = "id")
 	private Mnemonic mnemonic;
 
+	@Column(name = "mnemonicname")
+	private String mnemonicName;
+
 	public UUID getId() {
 		return id;
 	}
@@ -60,9 +63,17 @@ public class AppComponents extends BaseEntity {
 		this.mnemonic = mnemonic;
 	}
 
+	public String getMnemonicName() {
+		return mnemonicName;
+	}
+
+	public void setMnemonicName(String mnemonicName) {
+		this.mnemonicName = mnemonicName;
+	}
+
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(getId()).append(getAppComponentsName()).build();
+		return new HashCodeBuilder().append(getId()).append(getAppComponentsName()).append(getMnemonicName()).build();
 	}
 
 	@Override
@@ -72,7 +83,8 @@ public class AppComponents extends BaseEntity {
 		} else if (obj instanceof AppComponents) {
 			AppComponents entity = (AppComponents) obj;
 			return new EqualsBuilder().append(getId(), entity.getId())
-					.append(getAppComponentsName(), entity.getAppComponentsName()).build();
+					.append(getAppComponentsName(), entity.getAppComponentsName())
+					.append(getMnemonicName(), entity.getMnemonicName()).build();
 		} else {
 			return false;
 		}

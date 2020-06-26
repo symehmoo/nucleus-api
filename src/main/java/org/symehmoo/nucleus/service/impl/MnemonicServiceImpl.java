@@ -57,9 +57,7 @@ public class MnemonicServiceImpl implements MnemonicService {
 			MnemonicDTO mnemonicDTO = new MnemonicDTO();
 			mnemonicDTO.setId(mnemonic.getId());
 			mnemonicDTO.setMnemonicName(mnemonic.getMnemonicsName());
-			if (Objects.nonNull(mnemonic.getLob())) {
-				mnemonicDTO.setLobName(mnemonic.getLob().getLobName());
-			}
+			mnemonicDTO.setLobName(mnemonic.getLobName());
 			return mnemonicDTO;
 		};
 		return convertToDTOFunc;
@@ -82,6 +80,7 @@ public class MnemonicServiceImpl implements MnemonicService {
 		Mnemonic mnemonicToSave = new Mnemonic();
 		mnemonicToSave.setLob(lob);
 		mnemonicToSave.setMnemonicsName(mnemonicSaveDTO.getMnemonicName());
+		mnemonicToSave.setLobName(mnemonicSaveDTO.getLobName());
 		mnemonicRepository.save(mnemonicToSave);
 		return convertToDTOFunc().apply(mnemonicToSave);
 	}

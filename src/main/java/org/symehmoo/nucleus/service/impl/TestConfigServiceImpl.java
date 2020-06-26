@@ -65,17 +65,16 @@ public class TestConfigServiceImpl implements TestConfigService {
 			appComponents = new AppComponents();
 			appComponents.setMnemonic(mnemonic);
 			appComponents.setAppComponentsName(testConfigCreationDTO.getGitRepoName());
+			appComponents.setMnemonicName(testConfigCreationDTO.getMnemonicName());
 			appComponentsRepository.save(appComponents);
 		}
 		TestConfig newTestConfig = new TestConfig();
-		newTestConfig.setAppComponents(appComponents);
+		newTestConfig.setAppComponentName(testConfigCreationDTO.getGitRepoName());
+		newTestConfig.setMnemonicName(testConfigCreationDTO.getMnemonicName());
 		newTestConfig.setEnv(testConfigCreationDTO.getEnv());
 		newTestConfig.setGitRepoName(testConfigCreationDTO.getGitRepoName());
 		newTestConfig.setGitRepoURL(testConfigCreationDTO.getGitRepoURL());
-		if (Objects.nonNull(appComponents)) {
-			newTestConfig.setMnemonic(appComponents.getMnemonic());
-			newTestConfig.setLob(appComponents.getMnemonic().getLob());
-		}
+		newTestConfig.setLobName(mnemonic.getLob().getLobName());
 		newTestConfig.setScriptName(testConfigCreationDTO.getScriptName());
 		newTestConfig.setTestName(testConfigCreationDTO.getTestName());
 		newTestConfig.setUserid_users(testConfigCreationDTO.getUserid_users());
@@ -119,13 +118,13 @@ public class TestConfigServiceImpl implements TestConfigService {
 	private Function<TestConfig, TestConfigDTO> convertToDTOFunc() {
 		Function<TestConfig, TestConfigDTO> convertToDTOFunc = testConfig -> {
 			TestConfigDTO testConfigDTO = new TestConfigDTO();
-			testConfigDTO.setAppComponentName(testConfig.getAppComponents().getAppComponentsName());
+			testConfigDTO.setAppComponentName(testConfig.getAppComponentName());
 			testConfigDTO.setEnv(testConfig.getEnv());
 			testConfigDTO.setGitRepoName(testConfig.getGitRepoName());
 			testConfigDTO.setGitRepoURL(testConfig.getGitRepoURL());
 			testConfigDTO.setId(testConfig.getId());
-			testConfigDTO.setLobName(testConfig.getLob().getLobName());
-			testConfigDTO.setMnemonicsName(testConfig.getMnemonic().getMnemonicsName());
+			testConfigDTO.setLobName(testConfig.getLobName());
+			testConfigDTO.setMnemonicsName(testConfig.getMnemonicName());
 			testConfigDTO.setScriptName(testConfig.getScriptName());
 			testConfigDTO.setTestName(testConfig.getTestName());
 			testConfigDTO.setUserid_users(testConfig.getUserid_users());

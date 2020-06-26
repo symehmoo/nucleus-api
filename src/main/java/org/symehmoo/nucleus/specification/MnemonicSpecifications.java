@@ -24,7 +24,7 @@ public class MnemonicSpecifications extends BaseSpecification<Mnemonic> {
 			mnemonicSpecification = this.getEqualSpecification("lob.id", lobId);
 		}
 		if (Objects.nonNull(lobName)) {
-			mnemonicSpecification = this.getEqualSpecification("lob.lobName", lobName).and(mnemonicSpecification);
+			mnemonicSpecification = this.getEqualSpecification("lobName", lobName).and(mnemonicSpecification);
 		}
 		return mnemonicSpecification;
 	}

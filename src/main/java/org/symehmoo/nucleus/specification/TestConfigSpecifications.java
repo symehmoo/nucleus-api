@@ -23,17 +23,17 @@ public class TestConfigSpecifications extends BaseSpecification<TestConfig> {
 			testConfigSpecification = getEqualSpecification("testName", testConfigSearchDTO.getTestName());
 		}
 		if (Objects.nonNull(testConfigSearchDTO.getLobName())) {
-			testConfigSpecification = this.getEqualSpecification("lob.lobName", testConfigSearchDTO.getLobName())
+			testConfigSpecification = this.getEqualSpecification("lobName", testConfigSearchDTO.getLobName())
 					.and(testConfigSpecification);
 		}
 		if (Objects.nonNull(testConfigSearchDTO.getMnemonicsName())) {
-			testConfigSpecification = this
-					.getEqualSpecification("mnemonic.mnemonicsName", testConfigSearchDTO.getMnemonicsName())
+			testConfigSpecification = this.getEqualSpecification("mnemonicName", testConfigSearchDTO.getMnemonicsName())
 					.and(testConfigSpecification);
 		}
 		if (Objects.nonNull(testConfigSearchDTO.getAppComponentsName())) {
-			testConfigSpecification = this.getEqualSpecification("appComponents.appComponentsName",
-					testConfigSearchDTO.getAppComponentsName()).and(testConfigSpecification);
+			testConfigSpecification = this
+					.getEqualSpecification("appComponentName", testConfigSearchDTO.getAppComponentsName())
+					.and(testConfigSpecification);
 		}
 		if (Objects.nonNull(testConfigSearchDTO.getTestType())) {
 			testConfigSpecification = this.getEqualSpecification("testType", testConfigSearchDTO.getTestType())

@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -53,17 +51,14 @@ public class TestConfig extends BaseEntity {
 	@Column(name = "userid_users")
 	private String userid_users;
 
-	@ManyToOne
-	@JoinColumn(name = "lobid", referencedColumnName = "id")
-	private Lob lob;
+	@Column(name = "lobname")
+	private String lobName;
 
-	@ManyToOne
-	@JoinColumn(name = "mnemonicid", referencedColumnName = "id")
-	private Mnemonic mnemonic;
+	@Column(name = "mnemonicname")
+	private String mnemonicName;
 
-	@ManyToOne
-	@JoinColumn(name = "appcomponentsid", referencedColumnName = "id")
-	private AppComponents appComponents;
+	@Column(name = "appcomponentname")
+	private String appComponentName;
 
 	public UUID getId() {
 		return id;
@@ -121,28 +116,28 @@ public class TestConfig extends BaseEntity {
 		this.userid_users = userid_users;
 	}
 
-	public Lob getLob() {
-		return lob;
+	public String getLobName() {
+		return lobName;
 	}
 
-	public void setLob(Lob lob) {
-		this.lob = lob;
+	public void setLobName(String lobName) {
+		this.lobName = lobName;
 	}
 
-	public Mnemonic getMnemonic() {
-		return mnemonic;
+	public String getMnemonicName() {
+		return mnemonicName;
 	}
 
-	public void setMnemonic(Mnemonic mnemonic) {
-		this.mnemonic = mnemonic;
+	public void setMnemonicName(String mnemonicName) {
+		this.mnemonicName = mnemonicName;
 	}
 
-	public AppComponents getAppComponents() {
-		return appComponents;
+	public String getAppComponentName() {
+		return appComponentName;
 	}
 
-	public void setAppComponents(AppComponents appComponents) {
-		this.appComponents = appComponents;
+	public void setAppComponentName(String appComponentName) {
+		this.appComponentName = appComponentName;
 	}
 
 	public Integer getNumberOfAgents() {
@@ -165,7 +160,8 @@ public class TestConfig extends BaseEntity {
 	public int hashCode() {
 		return new HashCodeBuilder().append(getId()).append(getTestName()).append(getGitRepoName())
 				.append(getGitRepoURL()).append(getScriptName()).append(getEnv()).append(getUserid_users())
-				.append(getTestType()).append(getNumberOfAgents()).build();
+				.append(getTestType()).append(getNumberOfAgents()).append(getLobName()).append(getMnemonicName())
+				.append(getAppComponentName()).build();
 	}
 
 	@Override
@@ -178,7 +174,9 @@ public class TestConfig extends BaseEntity {
 					.append(getGitRepoName(), entity.getGitRepoName()).append(getGitRepoURL(), entity.getGitRepoURL())
 					.append(getScriptName(), entity.getScriptName()).append(getEnv(), entity.getEnv())
 					.append(getUserid_users(), entity.getUserid_users()).append(getTestType(), entity.getTestType())
-					.append(getNumberOfAgents(), entity.getNumberOfAgents()).build();
+					.append(getNumberOfAgents(), entity.getNumberOfAgents()).append(getLobName(), entity.getLobName())
+					.append(getMnemonicName(), entity.getMnemonicName())
+					.append(getAppComponentName(), entity.getAppComponentName()).build();
 		} else {
 			return false;
 		}

@@ -24,7 +24,7 @@ public class AppComponentSpecifications extends BaseSpecification<AppComponents>
 			appComponentsSpecification = getEqualSpecification("mnemonic.id", mnemonicId);
 		}
 		if (Objects.nonNull(mnemonicsName)) {
-			appComponentsSpecification = getEqualSpecification("mnemonic.mnemonicsName", mnemonicsName)
+			appComponentsSpecification = getEqualSpecification("mnemonicName", mnemonicsName)
 					.and(appComponentsSpecification);
 		}
 		return appComponentsSpecification;

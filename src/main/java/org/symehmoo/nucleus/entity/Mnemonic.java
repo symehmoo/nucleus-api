@@ -36,6 +36,9 @@ public class Mnemonic extends BaseEntity {
 	@JoinColumn(name = "lobid", referencedColumnName = "id")
 	private Lob lob;
 
+	@Column(name = "lobname")
+	private String lobName;
+
 	public UUID getId() {
 		return id;
 	}
@@ -60,9 +63,17 @@ public class Mnemonic extends BaseEntity {
 		this.lob = lob;
 	}
 
+	public String getLobName() {
+		return lobName;
+	}
+
+	public void setLobName(String lobName) {
+		this.lobName = lobName;
+	}
+
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(getId()).append(getMnemonicsName()).build();
+		return new HashCodeBuilder().append(getId()).append(getMnemonicsName()).append(getLobName()).build();
 	}
 
 	@Override
@@ -72,7 +83,8 @@ public class Mnemonic extends BaseEntity {
 		} else if (obj instanceof Mnemonic) {
 			Mnemonic entity = (Mnemonic) obj;
 			return new EqualsBuilder().append(getId(), entity.getId())
-					.append(getMnemonicsName(), entity.getMnemonicsName()).build();
+					.append(getMnemonicsName(), entity.getMnemonicsName()).append(getLobName(), entity.getLobName())
+					.build();
 		} else {
 			return false;
 		}

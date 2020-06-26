@@ -59,9 +59,7 @@ public class AppComponentsServiceImpl implements AppComponentsService {
 			AppComponentsDTO appComponentsDTO = new AppComponentsDTO();
 			appComponentsDTO.setId(appComponents.getId());
 			appComponentsDTO.setAppComponentsName(appComponents.getAppComponentsName());
-			if (Objects.nonNull(appComponents.getMnemonic())) {
-				appComponentsDTO.setMnemonicName(appComponents.getMnemonic().getMnemonicsName());
-			}
+			appComponentsDTO.setMnemonicName(appComponents.getMnemonicName());
 			return appComponentsDTO;
 		};
 		return convertToDTOFunc;
@@ -85,6 +83,7 @@ public class AppComponentsServiceImpl implements AppComponentsService {
 		AppComponents appComponentsToSave = new AppComponents();
 		appComponentsToSave.setMnemonic(mnemonic);
 		appComponentsToSave.setAppComponentsName(appComponentsSaveDTO.getAppComponentsName());
+		appComponentsToSave.setMnemonicName(appComponentsSaveDTO.getMnemonicName());
 		appComponentsRepository.save(appComponentsToSave);
 		return convertToDTOFunc().apply(appComponentsToSave);
 	}
