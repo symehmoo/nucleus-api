@@ -3,7 +3,7 @@ package org.symehmoo.nucleus.constant;
 /**
  * Enum to represent test execution status
  */
-public enum RunStatus {
+public enum TestStatus {
 
-	STARTED, RUNNING, COMPLETED, FAILED
+	PASSED, FAILED
 }

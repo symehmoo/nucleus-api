@@ -80,6 +80,9 @@ public class TestConfigServiceImpl implements TestConfigService {
 		newTestConfig.setUserid_users(testConfigCreationDTO.getUserid_users());
 		newTestConfig.setTestType(testConfigCreationDTO.getTestType());
 		newTestConfig.setNumberOfAgents(testConfigCreationDTO.getNumberOfAgents());
+		newTestConfig.setAvg_responsetime(testConfigCreationDTO.getAvg_responsetime());
+		newTestConfig.setAvg_tranpersec(testConfigCreationDTO.getAvg_tranpersec());
+		newTestConfig.setErr_perc(testConfigCreationDTO.getErr_perc());
 		testConfigRepository.save(newTestConfig);
 		return convertToDTOFunc().apply(newTestConfig);
 	}
@@ -130,6 +133,9 @@ public class TestConfigServiceImpl implements TestConfigService {
 			testConfigDTO.setUserid_users(testConfig.getUserid_users());
 			testConfigDTO.setTestType(testConfig.getTestType());
 			testConfigDTO.setNumberOfAgents(testConfig.getNumberOfAgents());
+			testConfigDTO.setAvg_responsetime(testConfig.getAvg_responsetime());
+			testConfigDTO.setAvg_tranpersec(testConfig.getAvg_tranpersec());
+			testConfigDTO.setErr_perc(testConfig.getErr_perc());
 			return testConfigDTO;
 		};
 		return convertToDTOFunc;
@@ -164,6 +170,9 @@ public class TestConfigServiceImpl implements TestConfigService {
 		test.setTestName(testConfigUpdateDTO.getTestName());
 		test.setScriptName(testConfigUpdateDTO.getScriptName());
 		test.setNumberOfAgents(testConfigUpdateDTO.getNumberOfAgents());
+		test.setAvg_responsetime(testConfigUpdateDTO.getAvg_responsetime());
+		test.setAvg_tranpersec(testConfigUpdateDTO.getAvg_tranpersec());
+		test.setErr_perc(testConfigUpdateDTO.getErr_perc());
 		testConfigRepository.save(test);
 	}
 

@@ -1,5 +1,6 @@
 package org.symehmoo.nucleus.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -48,6 +49,27 @@ public class TestExecution extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "testconfigid", referencedColumnName = "id")
 	private TestConfig testConfig;
+
+	@Column(name = "avg_tranpersec")
+	private BigDecimal avg_tranpersec;
+
+	@Column(name = "avg_responsetime")
+	private BigDecimal avg_responsetime;
+
+	@Column(name = "err_perc")
+	private BigDecimal err_perc;
+
+	@Column(name = "actual_avg_tranpersec")
+	private BigDecimal actual_avg_tranpersec;
+
+	@Column(name = "actual_avg_responsetime")
+	private BigDecimal actual_avg_responsetime;
+
+	@Column(name = "actual_err_perc")
+	private BigDecimal actual_err_perc;
+
+	@Column(name = "teststatus")
+	private String testStatus;
 
 	public UUID getId() {
 		return id;
@@ -105,10 +127,68 @@ public class TestExecution extends BaseEntity {
 		this.testConfig = testConfig;
 	}
 
+	public BigDecimal getAvg_tranpersec() {
+		return avg_tranpersec;
+	}
+
+	public void setAvg_tranpersec(BigDecimal avg_tranpersec) {
+		this.avg_tranpersec = avg_tranpersec;
+	}
+
+	public BigDecimal getAvg_responsetime() {
+		return avg_responsetime;
+	}
+
+	public void setAvg_responsetime(BigDecimal avg_responsetime) {
+		this.avg_responsetime = avg_responsetime;
+	}
+
+	public BigDecimal getErr_perc() {
+		return err_perc;
+	}
+
+	public void setErr_perc(BigDecimal err_perc) {
+		this.err_perc = err_perc;
+	}
+
+	public BigDecimal getActual_avg_tranpersec() {
+		return actual_avg_tranpersec;
+	}
+
+	public void setActual_avg_tranpersec(BigDecimal actual_avg_tranpersec) {
+		this.actual_avg_tranpersec = actual_avg_tranpersec;
+	}
+
+	public BigDecimal getActual_avg_responsetime() {
+		return actual_avg_responsetime;
+	}
+
+	public void setActual_avg_responsetime(BigDecimal actual_avg_responsetime) {
+		this.actual_avg_responsetime = actual_avg_responsetime;
+	}
+
+	public BigDecimal getActual_err_perc() {
+		return actual_err_perc;
+	}
+
+	public void setActual_err_perc(BigDecimal actual_err_perc) {
+		this.actual_err_perc = actual_err_perc;
+	}
+
+	public String getTestStatus() {
+		return testStatus;
+	}
+
+	public void setTestStatus(String testStatus) {
+		this.testStatus = testStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(getId()).append(getStartTime()).append(getEndTime()).append(getRunStatus())
-				.append(getProcessId()).append(getUserid_users()).build();
+				.append(getProcessId()).append(getUserid_users()).append(getAvg_responsetime())
+				.append(getAvg_tranpersec()).append(getErr_perc()).append(getActual_avg_responsetime())
+				.append(getActual_avg_tranpersec()).append(getActual_err_perc()).append(getTestStatus()).build();
 	}
 
 	@Override
@@ -120,7 +200,12 @@ public class TestExecution extends BaseEntity {
 			return new EqualsBuilder().append(getId(), entity.getId()).append(getStartTime(), entity.getStartTime())
 					.append(getEndTime(), entity.getEndTime()).append(getRunStatus(), entity.getRunStatus())
 					.append(getProcessId(), entity.getProcessId()).append(getUserid_users(), entity.getUserid_users())
-					.build();
+					.append(getAvg_responsetime(), entity.getAvg_responsetime())
+					.append(getAvg_tranpersec(), entity.getAvg_tranpersec()).append(getErr_perc(), entity.getErr_perc())
+					.append(getActual_avg_responsetime(), entity.getActual_avg_responsetime())
+					.append(getActual_avg_tranpersec(), entity.getActual_avg_tranpersec())
+					.append(getActual_err_perc(), entity.getActual_err_perc())
+					.append(getTestStatus(), entity.getTestStatus()).build();
 		} else {
 			return false;
 		}

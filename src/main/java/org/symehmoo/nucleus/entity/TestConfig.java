@@ -1,5 +1,6 @@
 package org.symehmoo.nucleus.entity;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -59,6 +60,15 @@ public class TestConfig extends BaseEntity {
 
 	@Column(name = "appcomponentname")
 	private String appComponentName;
+
+	@Column(name = "avg_tranpersec")
+	private BigDecimal avg_tranpersec;
+
+	@Column(name = "avg_responsetime")
+	private BigDecimal avg_responsetime;
+
+	@Column(name = "err_perc")
+	private BigDecimal err_perc;
 
 	public UUID getId() {
 		return id;
@@ -156,12 +166,37 @@ public class TestConfig extends BaseEntity {
 		this.testType = testType;
 	}
 
+	public BigDecimal getAvg_tranpersec() {
+		return avg_tranpersec;
+	}
+
+	public void setAvg_tranpersec(BigDecimal avg_tranpersec) {
+		this.avg_tranpersec = avg_tranpersec;
+	}
+
+	public BigDecimal getAvg_responsetime() {
+		return avg_responsetime;
+	}
+
+	public void setAvg_responsetime(BigDecimal avg_responsetime) {
+		this.avg_responsetime = avg_responsetime;
+	}
+
+	public BigDecimal getErr_perc() {
+		return err_perc;
+	}
+
+	public void setErr_perc(BigDecimal err_perc) {
+		this.err_perc = err_perc;
+	}
+
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(getId()).append(getTestName()).append(getGitRepoName())
 				.append(getGitRepoURL()).append(getScriptName()).append(getEnv()).append(getUserid_users())
 				.append(getTestType()).append(getNumberOfAgents()).append(getLobName()).append(getMnemonicName())
-				.append(getAppComponentName()).build();
+				.append(getAppComponentName()).append(getAvg_responsetime()).append(getAvg_tranpersec())
+				.append(getErr_perc()).build();
 	}
 
 	@Override
@@ -176,7 +211,10 @@ public class TestConfig extends BaseEntity {
 					.append(getUserid_users(), entity.getUserid_users()).append(getTestType(), entity.getTestType())
 					.append(getNumberOfAgents(), entity.getNumberOfAgents()).append(getLobName(), entity.getLobName())
 					.append(getMnemonicName(), entity.getMnemonicName())
-					.append(getAppComponentName(), entity.getAppComponentName()).build();
+					.append(getAppComponentName(), entity.getAppComponentName())
+					.append(getAvg_responsetime(), entity.getAvg_responsetime())
+					.append(getAvg_tranpersec(), entity.getAvg_tranpersec()).append(getErr_perc(), entity.getErr_perc())
+					.build();
 		} else {
 			return false;
 		}

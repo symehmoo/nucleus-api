@@ -67,3 +67,13 @@ PRIMARY KEY(id),
 FOREIGN KEY (testconfigid) REFERENCES testconfig(id)
 );
 
+ALTER TABLE testconfig ADD avg_tranpersec DECIMAL(10,2);
+ALTER TABLE testconfig ADD avg_responsetime DECIMAL(10,2);
+ALTER TABLE testconfig ADD err_perc DECIMAL(10,2);
+ALTER TABLE testexecution ADD avg_tranpersec DECIMAL(10,2);
+ALTER TABLE testexecution ADD avg_responsetime DECIMAL(10,2);
+ALTER TABLE testexecution ADD err_perc DECIMAL(10,2);
+ALTER TABLE testexecution ADD actual_avg_tranpersec DECIMAL(10,2);
+ALTER TABLE testexecution ADD actual_avg_responsetime DECIMAL(10,2);
+ALTER TABLE testexecution ADD actual_err_perc DECIMAL(10,2);
+ALTER TABLE testexecution ADD teststatus varchar(45);

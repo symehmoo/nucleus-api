@@ -1,5 +1,6 @@
 package org.symehmoo.nucleus.model;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
@@ -18,6 +19,9 @@ public class TestConfigDTO {
 	private String lobName;
 	private String testType;
 	private Integer numberOfAgents;
+	private BigDecimal avg_tranpersec;
+	private BigDecimal avg_responsetime;
+	private BigDecimal err_perc;
 
 	public TestConfigDTO() {
 		super();
@@ -25,7 +29,7 @@ public class TestConfigDTO {
 
 	public TestConfigDTO(UUID id, String testName, String gitRepoName, String gitRepoURL, String scriptName, String env,
 			String userid_users, String appComponentName, String mnemonicsName, String lobName, String testType,
-			Integer numberOfAgents) {
+			Integer numberOfAgents, BigDecimal avg_tranpersec, BigDecimal avg_responsetime, BigDecimal err_perc) {
 		super();
 		this.id = id;
 		this.testName = testName;
@@ -39,6 +43,9 @@ public class TestConfigDTO {
 		this.lobName = lobName;
 		this.testType = testType;
 		this.numberOfAgents = numberOfAgents;
+		this.avg_tranpersec = avg_tranpersec;
+		this.avg_responsetime = avg_responsetime;
+		this.err_perc = err_perc;
 	}
 
 	public UUID getId() {
@@ -137,12 +144,37 @@ public class TestConfigDTO {
 		this.numberOfAgents = numberOfAgents;
 	}
 
+	public BigDecimal getAvg_tranpersec() {
+		return avg_tranpersec;
+	}
+
+	public void setAvg_tranpersec(BigDecimal avg_tranpersec) {
+		this.avg_tranpersec = avg_tranpersec;
+	}
+
+	public BigDecimal getAvg_responsetime() {
+		return avg_responsetime;
+	}
+
+	public void setAvg_responsetime(BigDecimal avg_responsetime) {
+		this.avg_responsetime = avg_responsetime;
+	}
+
+	public BigDecimal getErr_perc() {
+		return err_perc;
+	}
+
+	public void setErr_perc(BigDecimal err_perc) {
+		this.err_perc = err_perc;
+	}
+
 	@Override
 	public String toString() {
 		return "TestConfigDTO [id=" + id + ", testName=" + testName + ", gitRepoName=" + gitRepoName + ", gitRepoURL="
 				+ gitRepoURL + ", scriptName=" + scriptName + ", env=" + env + ", userid_users=" + userid_users
 				+ ", appComponentName=" + appComponentName + ", mnemonicsName=" + mnemonicsName + ", lobName=" + lobName
-				+ ", testType=" + testType + ", numberOfAgents=" + numberOfAgents + "]";
+				+ ", testType=" + testType + ", numberOfAgents=" + numberOfAgents + ", avg_tranpersec=" + avg_tranpersec
+				+ ", avg_responsetime=" + avg_responsetime + ", err_perc=" + err_perc + "]";
 	}
 
 	@Override
@@ -150,17 +182,20 @@ public class TestConfigDTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((appComponentName == null) ? 0 : appComponentName.hashCode());
+		result = prime * result + ((avg_responsetime == null) ? 0 : avg_responsetime.hashCode());
+		result = prime * result + ((avg_tranpersec == null) ? 0 : avg_tranpersec.hashCode());
 		result = prime * result + ((env == null) ? 0 : env.hashCode());
+		result = prime * result + ((err_perc == null) ? 0 : err_perc.hashCode());
 		result = prime * result + ((gitRepoName == null) ? 0 : gitRepoName.hashCode());
 		result = prime * result + ((gitRepoURL == null) ? 0 : gitRepoURL.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
 		result = prime * result + ((mnemonicsName == null) ? 0 : mnemonicsName.hashCode());
+		result = prime * result + ((numberOfAgents == null) ? 0 : numberOfAgents.hashCode());
 		result = prime * result + ((scriptName == null) ? 0 : scriptName.hashCode());
 		result = prime * result + ((testName == null) ? 0 : testName.hashCode());
-		result = prime * result + ((userid_users == null) ? 0 : userid_users.hashCode());
 		result = prime * result + ((testType == null) ? 0 : testType.hashCode());
-		result = prime * result + ((numberOfAgents == null) ? 0 : numberOfAgents.hashCode());
+		result = prime * result + ((userid_users == null) ? 0 : userid_users.hashCode());
 		return result;
 	}
 
@@ -178,10 +213,25 @@ public class TestConfigDTO {
 				return false;
 		} else if (!appComponentName.equals(other.appComponentName))
 			return false;
+		if (avg_responsetime == null) {
+			if (other.avg_responsetime != null)
+				return false;
+		} else if (!avg_responsetime.equals(other.avg_responsetime))
+			return false;
+		if (avg_tranpersec == null) {
+			if (other.avg_tranpersec != null)
+				return false;
+		} else if (!avg_tranpersec.equals(other.avg_tranpersec))
+			return false;
 		if (env == null) {
 			if (other.env != null)
 				return false;
 		} else if (!env.equals(other.env))
+			return false;
+		if (err_perc == null) {
+			if (other.err_perc != null)
+				return false;
+		} else if (!err_perc.equals(other.err_perc))
 			return false;
 		if (gitRepoName == null) {
 			if (other.gitRepoName != null)
@@ -208,6 +258,11 @@ public class TestConfigDTO {
 				return false;
 		} else if (!mnemonicsName.equals(other.mnemonicsName))
 			return false;
+		if (numberOfAgents == null) {
+			if (other.numberOfAgents != null)
+				return false;
+		} else if (!numberOfAgents.equals(other.numberOfAgents))
+			return false;
 		if (scriptName == null) {
 			if (other.scriptName != null)
 				return false;
@@ -218,20 +273,15 @@ public class TestConfigDTO {
 				return false;
 		} else if (!testName.equals(other.testName))
 			return false;
-		if (userid_users == null) {
-			if (other.userid_users != null)
-				return false;
-		} else if (!userid_users.equals(other.userid_users))
-			return false;
 		if (testType == null) {
 			if (other.testType != null)
 				return false;
 		} else if (!testType.equals(other.testType))
 			return false;
-		if (numberOfAgents == null) {
-			if (other.numberOfAgents != null)
+		if (userid_users == null) {
+			if (other.userid_users != null)
 				return false;
-		} else if (!numberOfAgents.equals(other.numberOfAgents))
+		} else if (!userid_users.equals(other.userid_users))
 			return false;
 		return true;
 	}

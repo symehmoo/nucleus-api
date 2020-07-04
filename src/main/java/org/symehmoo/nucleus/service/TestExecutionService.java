@@ -2,11 +2,13 @@ package org.symehmoo.nucleus.service;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.data.domain.Sort;
 import org.symehmoo.nucleus.model.TestExecutionDTO;
 import org.symehmoo.nucleus.model.TestExecutionRunDTO;
 import org.symehmoo.nucleus.model.TestExecutionSearchDTO;
+import org.symehmoo.nucleus.model.TestExecutionStatusUpdateDTO;
 
 public interface TestExecutionService {
 
@@ -29,5 +31,13 @@ public interface TestExecutionService {
 	 * @return {@link TestExecutionDTO} collection
 	 */
 	public Collection<TestExecutionDTO> searchTestExecution(Sort sort, TestExecutionSearchDTO testExecutionSearchDTO);
+
+	/**
+	 * Method to update test execution status.
+	 * 
+	 * @param testExecutionStatusUpdateDTO
+	 */
+	public void updateTestExecutionStatus(UUID testExecutionId,
+			TestExecutionStatusUpdateDTO testExecutionStatusUpdateDTO);
 
 }

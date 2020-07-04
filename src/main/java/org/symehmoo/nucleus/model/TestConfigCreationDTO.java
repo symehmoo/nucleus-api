@@ -1,5 +1,7 @@
 package org.symehmoo.nucleus.model;
 
+import java.math.BigDecimal;
+
 /**
  * Data object used to create test config record
  */
@@ -13,13 +15,17 @@ public class TestConfigCreationDTO {
 	private String mnemonicName;
 	private String testType;
 	private Integer numberOfAgents;
+	private BigDecimal avg_tranpersec;
+	private BigDecimal avg_responsetime;
+	private BigDecimal err_perc;
 
 	public TestConfigCreationDTO() {
 		super();
 	}
 
 	public TestConfigCreationDTO(String gitRepoURL, String gitRepoName, String scriptName, String testName,
-			String mnemonicName, String env, String userid_users, String testType, Integer numberOfAgents) {
+			String mnemonicName, String env, String userid_users, String testType, Integer numberOfAgents,
+			BigDecimal avg_tranpersec, BigDecimal avg_responsetime, BigDecimal err_perc) {
 		super();
 		this.gitRepoURL = gitRepoURL;
 		this.gitRepoName = gitRepoName;
@@ -29,7 +35,9 @@ public class TestConfigCreationDTO {
 		this.env = env;
 		this.userid_users = userid_users;
 		this.testType = testType;
-		this.numberOfAgents = numberOfAgents;
+		this.avg_tranpersec = avg_tranpersec;
+		this.avg_responsetime = avg_responsetime;
+		this.err_perc = err_perc;
 	}
 
 	public String getTestName() {
@@ -104,12 +112,37 @@ public class TestConfigCreationDTO {
 		this.numberOfAgents = numberOfAgents;
 	}
 
+	public BigDecimal getAvg_tranpersec() {
+		return avg_tranpersec;
+	}
+
+	public void setAvg_tranpersec(BigDecimal avg_tranpersec) {
+		this.avg_tranpersec = avg_tranpersec;
+	}
+
+	public BigDecimal getAvg_responsetime() {
+		return avg_responsetime;
+	}
+
+	public void setAvg_responsetime(BigDecimal avg_responsetime) {
+		this.avg_responsetime = avg_responsetime;
+	}
+
+	public BigDecimal getErr_perc() {
+		return err_perc;
+	}
+
+	public void setErr_perc(BigDecimal err_perc) {
+		this.err_perc = err_perc;
+	}
+
 	@Override
 	public String toString() {
 		return "TestConfigCreationDTO [testName=" + testName + ", gitRepoName=" + gitRepoName + ", gitRepoURL="
 				+ gitRepoURL + ", scriptName=" + scriptName + ", env=" + env + ", userid_users=" + userid_users
 				+ ", mnemonicName=" + mnemonicName + ", testType=" + testType + ", numberOfAgents=" + numberOfAgents
-				+ "]";
+				+ ", avg_responsetime=" + avg_responsetime + ", avg_tranpersec=" + avg_tranpersec + ", err_perc="
+				+ err_perc + "]";
 	}
 
 	@Override
@@ -125,6 +158,9 @@ public class TestConfigCreationDTO {
 		result = prime * result + ((userid_users == null) ? 0 : userid_users.hashCode());
 		result = prime * result + ((testType == null) ? 0 : testType.hashCode());
 		result = prime * result + ((numberOfAgents == null) ? 0 : numberOfAgents.hashCode());
+		result = prime * result + ((avg_responsetime == null) ? 0 : avg_responsetime.hashCode());
+		result = prime * result + ((avg_tranpersec == null) ? 0 : avg_tranpersec.hashCode());
+		result = prime * result + ((err_perc == null) ? 0 : err_perc.hashCode());
 		return result;
 	}
 
@@ -181,6 +217,21 @@ public class TestConfigCreationDTO {
 			if (other.testType != null)
 				return false;
 		} else if (!testType.equals(other.testType))
+			return false;
+		if (avg_responsetime == null) {
+			if (other.avg_responsetime != null)
+				return false;
+		} else if (!avg_responsetime.equals(other.avg_responsetime))
+			return false;
+		if (avg_tranpersec == null) {
+			if (other.avg_tranpersec != null)
+				return false;
+		} else if (!avg_tranpersec.equals(other.avg_tranpersec))
+			return false;
+		if (err_perc == null) {
+			if (other.err_perc != null)
+				return false;
+		} else if (!err_perc.equals(other.err_perc))
 			return false;
 		return true;
 	}
