@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.symehmoo.nucleus.entity.AppComponents;
+import org.symehmoo.nucleus.entity.Lob;
 import org.symehmoo.nucleus.entity.Mnemonic;
 import org.symehmoo.nucleus.entity.TestConfig;
 import org.symehmoo.nucleus.model.TestConfigCreationDTO;
@@ -19,6 +20,7 @@ import org.symehmoo.nucleus.model.TestConfigDTO;
 import org.symehmoo.nucleus.model.TestConfigSearchDTO;
 import org.symehmoo.nucleus.model.TestConfigUpdateDTO;
 import org.symehmoo.nucleus.repository.AppComponentsRepository;
+import org.symehmoo.nucleus.repository.LobRepository;
 import org.symehmoo.nucleus.repository.MnemonicRepository;
 import org.symehmoo.nucleus.repository.TestConfigRepository;
 import org.symehmoo.nucleus.service.TestConfigService;
@@ -35,14 +37,17 @@ public class TestConfigServiceImpl implements TestConfigService {
 
 	private final MnemonicRepository mnemonicRepository;
 
+	private final LobRepository lobRepository;
+
 	@Autowired
 	public TestConfigServiceImpl(TestConfigRepository testConfigRepository,
 			TestConfigSpecifications testConfigSpecifications, AppComponentsRepository appComponentsRepository,
-			MnemonicRepository mnemonicRepository) {
+			MnemonicRepository mnemonicRepository, LobRepository lobRepository) {
 		this.testConfigRepository = testConfigRepository;
 		this.testConfigSpecifications = testConfigSpecifications;
 		this.appComponentsRepository = appComponentsRepository;
 		this.mnemonicRepository = mnemonicRepository;
+		this.lobRepository = lobRepository;
 	}
 
 	/**
@@ -57,7 +62,15 @@ public class TestConfigServiceImpl implements TestConfigService {
 		}
 		Mnemonic mnemonic = mnemonicRepository.findByMnemonicsNameIgnoreCase(testConfigCreationDTO.getMnemonicName());
 		if (Objects.isNull(mnemonic)) {
-			throw new RuntimeException("Mnemonic with this name not found");
+			Lob lob = lobRepository.findByLobNameIgnoreCase(testConfigCreationDTO.getLobName());
+			if (Objects.isNull(lob)) {
+				throw new RuntimeException("Lob with this name not found");
+			}
+			mnemonic = new Mnemonic();
+			mnemonic.setLob(lob);
+			mnemonic.setLobName(lob.getLobName());
+			mnemonic.setMnemonicsName(testConfigCreationDTO.getMnemonicName());
+			mnemonic = mnemonicRepository.save(mnemonic);
 		}
 		AppComponents appComponents = appComponentsRepository.findByMnemonic_IdAndAppComponentsNameIgnoreCase(
 				mnemonic.getId(), testConfigCreationDTO.getGitRepoName());
@@ -102,6 +115,10 @@ public class TestConfigServiceImpl implements TestConfigService {
 		}
 		if (StringUtils.isBlank(testConfigCreationDTO.getGitRepoName())) {
 			throw new RuntimeException("Git repo name cannot be null");
+		}
+
+		if (StringUtils.isBlank(testConfigCreationDTO.getLobName())) {
+			throw new RuntimeException("Lob name cannot be null");
 		}
 
 		if (StringUtils.isBlank(testConfigCreationDTO.getMnemonicName())) {

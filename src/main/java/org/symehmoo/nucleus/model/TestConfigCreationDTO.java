@@ -12,6 +12,7 @@ public class TestConfigCreationDTO {
 	private String scriptName;
 	private String env;
 	private String userid_users;
+	private String lobName;
 	private String mnemonicName;
 	private String testType;
 	private Integer numberOfAgents;
@@ -24,13 +25,14 @@ public class TestConfigCreationDTO {
 	}
 
 	public TestConfigCreationDTO(String gitRepoURL, String gitRepoName, String scriptName, String testName,
-			String mnemonicName, String env, String userid_users, String testType, Integer numberOfAgents,
-			BigDecimal avg_tranpersec, BigDecimal avg_responsetime, BigDecimal err_perc) {
+			String lobName, String mnemonicName, String env, String userid_users, String testType,
+			Integer numberOfAgents, BigDecimal avg_tranpersec, BigDecimal avg_responsetime, BigDecimal err_perc) {
 		super();
 		this.gitRepoURL = gitRepoURL;
 		this.gitRepoName = gitRepoName;
 		this.scriptName = scriptName;
 		this.testName = testName;
+		this.lobName = lobName;
 		this.mnemonicName = mnemonicName;
 		this.env = env;
 		this.userid_users = userid_users;
@@ -136,13 +138,21 @@ public class TestConfigCreationDTO {
 		this.err_perc = err_perc;
 	}
 
+	public String getLobName() {
+		return lobName;
+	}
+
+	public void setLobName(String lobName) {
+		this.lobName = lobName;
+	}
+
 	@Override
 	public String toString() {
-		return "TestConfigCreationDTO [testName=" + testName + ", gitRepoName=" + gitRepoName + ", gitRepoURL="
-				+ gitRepoURL + ", scriptName=" + scriptName + ", env=" + env + ", userid_users=" + userid_users
-				+ ", mnemonicName=" + mnemonicName + ", testType=" + testType + ", numberOfAgents=" + numberOfAgents
-				+ ", avg_responsetime=" + avg_responsetime + ", avg_tranpersec=" + avg_tranpersec + ", err_perc="
-				+ err_perc + "]";
+		return "TestConfigCreationDTO [lobName=" + lobName + "testName=" + testName + ", gitRepoName=" + gitRepoName
+				+ ", gitRepoURL=" + gitRepoURL + ", scriptName=" + scriptName + ", env=" + env + ", userid_users="
+				+ userid_users + ", mnemonicName=" + mnemonicName + ", testType=" + testType + ", numberOfAgents="
+				+ numberOfAgents + ", avg_responsetime=" + avg_responsetime + ", avg_tranpersec=" + avg_tranpersec
+				+ ", err_perc=" + err_perc + "]";
 	}
 
 	@Override
@@ -161,6 +171,7 @@ public class TestConfigCreationDTO {
 		result = prime * result + ((avg_responsetime == null) ? 0 : avg_responsetime.hashCode());
 		result = prime * result + ((avg_tranpersec == null) ? 0 : avg_tranpersec.hashCode());
 		result = prime * result + ((err_perc == null) ? 0 : err_perc.hashCode());
+		result = prime * result + ((lobName == null) ? 0 : lobName.hashCode());
 		return result;
 	}
 
@@ -232,6 +243,11 @@ public class TestConfigCreationDTO {
 			if (other.err_perc != null)
 				return false;
 		} else if (!err_perc.equals(other.err_perc))
+			return false;
+		if (lobName == null) {
+			if (other.lobName != null)
+				return false;
+		} else if (!lobName.equals(other.lobName))
 			return false;
 		return true;
 	}
